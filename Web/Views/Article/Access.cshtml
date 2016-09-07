@@ -1,0 +1,313 @@
+﻿@{
+    ViewBag.Title = "Access";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery.form.js"></script>
+<link href="~/Editor/themes/default/default.css" rel="stylesheet" />
+<link href="~/Editor/plugins/code/prettify.css" rel="stylesheet" />
+<script src="~/Editor/kindeditor.js"></script>
+<script src="~/Editor/lang/zh_CN.js"></script>
+<script src="~/Editor/plugins/code/prettify.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#articleDescription").text();
+        $("#articleDescription").keyup(
+            function () {
+                var desLength = parseInt($("#articleDescription").val().length);
+                var desValue = $("#articleDescription").val();
+                var resNum = 50 - desLength
+                if (resNum > 0) {
+                    $("#desNum").html(resNum);
+                } else {
+                    alert("你输入的字数超过了限制！");
+                    $("#articleDescription").val(desValue.substring(0, 50));
+                    $("#desNum").html(0);
+                    $("#articleDescription").focus();
+                }
+                // isOver(document.getElementById("articleDescription"), document.getElementById("desNum"), 50);
+            }
+            )
+    })
+
+</script>
+<form id="articleForm" name="articleForm" method="post">
+    <table>
+        <tr>
+            <td>所属栏目:</td>
+            <td>
+                <input id="i_CategoryID" value="@ViewData["iCategoryID"]" name="i_CategoryID" class="easyui-combotree" style="width: 305px;" data-options="url:'@Url.Content("~/category/TreeJsonList")?bShowTop=false',required:true" missingmessage="请选择文章所属栏目.">
+            </td>
+        </tr>
+        <tr>
+            <td>标题:</td>
+            <td>
+                <input class="easyui-validatebox" type="text" name="s_Title" style="width: 300px;" data-options="required:true" maxlength="30"
+                    missingmessage="请输入文章标题." /></td>
+        </tr>
+        <tr>
+            <td class="tempauthor">作者/提供商:</td>
+            <td>
+                <input class="easyui-validatebox" style="width: 300px;" type="text" name="s_Author" maxlength="20" />
+            </td>
+        </tr>
+        <tr>
+            <td class="tempsize">信息大小:</td>
+            <td>
+                <input class="easyui-validatebox" style="width: 300px;" type="text" name="s_Size" maxlength="20" /><span class="tempsizeadd">MB</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="templang">信息语言:</td>
+            <td>
+                <input class="easyui-validatebox" style="width: 300px;" type="text" name="s_Lang" maxlength="20" />
+            </td>
+        </tr>
+        <tr>
+            <td class="temversion">信息版本:</td>
+            <td>
+                <input class="easyui-validatebox" style="width: 300px;" type="text" name="s_Version" maxlength="20" />
+            </td>
+        </tr>
+        <tr>
+            <td>发布时间:</td>
+            <td>
+                <input class="easyui-datebox" type="text" style="width: 120px;" data-options="formatter:myformatter" name="s_PublishTime" maxlength="20" />
+            </td>
+        </tr>
+        <tr>
+            <td>摘要/运行环境:</td>
+            <td>
+                <textarea class="easyui-validatebox" style="width: 300px; height: 50px;" name="s_Summary"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>属性:</td>
+            <td>
+                <input type="checkbox" id="b_IsTop" /><label for="b_IsTop">置顶</label>
+                <input type="hidden" name="b_IsTop" value="false" />
+                <input type="checkbox" id="b_IsSlide" /><label for="b_IsSlide">幻灯片</label>
+                <input type="hidden" name="b_IsSlide" value="false" />
+                <input type="checkbox" id="b_IsHot" /><label for="b_IsHot">热点</label>
+                <input type="hidden" name="b_IsHot" value="false" />
+            </td>
+        </tr>
+        <tr>
+            <td>导图:</td>
+            <td>
+                <input class="easyui-validatebox" style="width: 300px;" type="text" readonly="true" name="s_ImgPath" id="s_ImgPath" maxlength="255" />
+                <input type="button" value="上传" onclick="browserFile()" />
+                <span id="uploadTip" class="red"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>附件:</td>
+            <td>
+                <input class="easyui-validatebox" style="width: 300px;" type="text" name="s_Attach" id="s_Attach" maxlength="255" />
+                <input type="button" value="上传" onclick="browserAttach()" />
+                <span id="uploadAttachTip" class="red"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>独立模板:</td>
+            <td>
+                <input name="i_TemplateID" value="" class="easyui-combobox" data-options="url:'@Url.Content("~/template/ComboBoxList?bSelectFirst=false")',valueField:'id',  
+    textField:'text',editable:false" style="width:305px;">
+                <span class="red">仅当需要单独设置该文章格式时需要填写</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="tempenname">英文标题:</td>
+            <td>
+                <input class="easyui-validatebox" type="text" name="s_EnName" data-options="validType:'english'" maxlength="25"
+                    invalidmessage="只能输入英文与数字的组合." style="width: 300px;" />
+            </td>
+        </tr>
+        <tr>
+            <td>内容描述:</td>
+            <td>
+                <textarea id="s_Content" name="s_Content"></textarea>
+                <input type="hidden" id="replaceContent" name="s_Content" />@*替代的内容*@
+            </td>
+        </tr>
+        <tr>
+            <td>文章关键字:</td>
+            <td>
+                <input class="easyui-validatebox" style="width: 300px;" type="text" name="s_KeyWord" maxlength="20" />
+                多个关键字请用英文逗号隔开.
+            </td>
+        </tr>
+        <tr>
+            <td>文章描述:</td>
+            <td>
+                <textarea class="easyui-validatebox" style="width: 300px; height: 50px;" name="s_Description" id="articleDescription"></textarea><span>你还可以输入<span id="desNum" style="color: red; font-weight: 700">50</span>个汉字</span>
+            </td>
+        </tr>
+    </table>
+</form>
+<div id="uploadFormPanel" class="easyui-dialog" title="图片上传" style="width: 400px; height: 80px; padding: 10px;" closed="true"
+    data-options="resizable:false,modal:true">
+    <form id="uploadForm" action="@Url.Content("~/Upload/Upload")?dir=image" enctype="multipart/form-data" method="post">
+        <input type="file" name="imgFile" id="imgFile" />
+        <input type="submit" value="确定" id="btnSubmit" />
+    </form>
+</div>
+<div id="uploadAttachFormPanel" class="easyui-dialog" title="附件上传" style="width: 400px; height: 80px; padding: 10px;" closed="true"
+    data-options="resizable:false,modal:true">
+    <form id="uploadAttachForm" action="@Url.Content("~/Upload/Upload")?dir=file" enctype="multipart/form-data" method="post">
+        <input type="file" name="imgFile" id="attachFile" />
+        <input type="submit" value="确定" id="btnAttachSubmit" />
+    </form>
+</div>
+<script type="text/javascript">
+
+    //格式化时间
+    function myformatter(date) {
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        var d = date.getDate();
+        return y + '-' + (m < 10 ? ('0' + m) : m) + '-' + (d < 10 ? ('0' + d) : d);
+    }
+
+    /*
+    提交表单
+    */
+    function saveArticle(url) {
+        if (window.editor) {
+            $('#s_Content').val(window.editor.html());//将编辑器的内容赋给textarea
+        }
+        $('#articleForm').form('submit', {
+            url: url,
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                if (result == "yes") {
+                    window.parent.refreshArticleList();
+                }
+                else {
+                    window.parent.messageAlert(result);
+                }
+            }
+        });
+    }
+
+    //加载所要修改的栏目信息
+    function getArticleInfo(id) {
+        if (id != undefined && id != 'undefined') {
+            $('#articleForm').form('load', "@Url.Content("~/article/Edit/")" + id + "?" + new Date().getTime());
+        }
+    }
+
+function browserFile() {
+    $("#uploadFormPanel").dialog("open");
+}
+
+
+//图片上传表单提交
+$('#uploadForm').submit(function () {
+    $("#uploadTip").html("正在上传...");
+    var tempHtml = $("#uploadForm").html();//存放图片上传表单内容 用于辅助清空文件选择控件
+    // 提交表单
+    $(this).ajaxSubmit(function (result) {
+        try {
+            var jsonResult = eval('(' + result + ')');
+            if (jsonResult) {
+                if (jsonResult.error == 0) {
+                    $("#s_ImgPath").val(jsonResult.url);
+                    $("#uploadTip").html("上传成功.");
+                }
+                else {
+                    $("#uploadTip").html("上传失败.");
+                }
+            }
+            else {
+                $("#uploadTip").html("上传失败.");
+            }
+        } catch (e) {
+            $("#uploadTip").html(result);//显示错误信息
+        }
+        $("#uploadForm").html(tempHtml);
+    });
+    $("#uploadFormPanel").dialog("close");
+    return false;
+});
+
+//模拟点击文件浏览按钮
+function browserAttach() {
+    $("#uploadAttachFormPanel").dialog("open");
+}
+
+
+//附件上传表单提交
+$('#uploadAttachForm').submit(function () {
+    $("#uploadAttachTip").html("正在上传...");
+    var tempHtml = $('#uploadAttachForm').html();
+    // 提交表单
+    $(this).ajaxSubmit(function (result) {
+        try {
+            var jsonResult = eval('(' + result + ')');
+            if (jsonResult) {
+                if (jsonResult.error == 0) {
+                    $("#s_Attach").val(jsonResult.url);
+                    $("#uploadAttachTip").html("上传成功.");
+                }
+                else {
+                    $("#uploadAttachTip").html("上传失败.");
+                }
+            }
+            else {
+                $("#uploadAttachTip").html("上传失败.");
+            }
+        } catch (e) {
+            $("#uploadAttachTip").html(result);//显示错误信息
+        }
+        $('#uploadAttachForm').html(tempHtml);
+    });
+    $("#uploadAttachFormPanel").dialog("close");
+    return false;
+});
+
+//页面加载完成
+$(function () {
+    //蒲剑波加，处理临时的商品录入
+    var thisCategory = parent.$("#categoryArticleTreeList .tree-node-selected").text();
+    if (thisCategory == "保健品" || thisCategory == "保健器材" || thisCategory == "皮肤护理") {
+        if ($(".tempauthor").text() != "市场价格:") {
+            $(".tempauthor").text("市场价格:");
+            $(".tempsize").text("商品库存:");
+            $(".templang").text("销售价格:");
+            $(".temversion").text("产品类别:");
+            $(".tempenname").text("产品编号:");
+            $(".tempsizeadd").text("");
+        }
+    }
+
+    $('#articleForm').form({
+        onLoadSuccess: function (data) {//表单数据加载完后
+            window.editor.html($("#replaceContent").val());//设置富文本编辑器的值
+            $("form input[type=checkbox]").each(function () {
+                if ($("input[name=" + $(this).attr("id") + "]").val() == "true") {
+                    $(this).attr("checked", true);
+                }
+                else {
+                    $(this).attr("checked", false);
+                }
+            });
+        }
+    });
+    $("form input[type=checkbox]").each(function () {
+        $(this).click(function () {//让复选框选择与否状态值 赋给隐藏变量
+            if ($(this).attr("checked")) {
+                $("input[name=" + $(this).attr("id") + "]").val("true");
+            }
+            else {
+                $("input[name=" + $(this).attr("id") + "]").val("false");
+            }
+        });
+    });
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#s_Content', { uploadJson: '@Url.Content("~/Upload/Upload")' });
+        getArticleInfo(@Request.QueryString["id"]);
+    });
+});
+</script>

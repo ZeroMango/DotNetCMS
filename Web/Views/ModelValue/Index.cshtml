@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <input class="easyui-searchbox" data-options="prompt:'请输入关键字...',searcher:do_@ViewData["iTableID"]Search" maxlength="20" style="width: 200px" />
+    <div style="margin-top: 15px;">
+        <div id="modelValueToolbar_@ViewData["iTableID"].ToString()">
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true" onclick="add_@ViewData["iTableID"]ModelValue()">新增</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true" onclick="edit_@ViewData["iTableID"]ModelValue()">编辑</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" plain="true" onclick="delete_@ViewData["iTableID"]ModelValue()">删除</a>
+        </div>
+        <table id="modelValueList_@ViewData["iTableID"].ToString()"></table>
+    </div>
+    <div id="actionModelValue-buttons_@ViewData["iTableID"].ToString()">
+        <a href="javascript:void(0)" id="btnModelValueSave_@ViewData["iTableID"].ToString()" class="easyui-linkbutton" iconcls="icon-ok" plain="true">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" plain="true" onclick="clear_@ViewData["iTableID"]Form()">清除</a>
+    </div>
+    <div id="modelValuePanel_@ViewData["iTableID"].ToString()" class="easyui-dialog" title="模型内容信息设置" style="width: 550px; height:320px; padding: 1px;" closed="true"
+        buttons="#actionModelValue-buttons_@ViewData["iTableID"].ToString()" data-options="iconCls:'icon-save',resizable:false,modal:true">
+        <iframe id="formactionModelValueFrame_@ViewData["iTableID"].ToString()" src="@Url.Content("~/ModelValue/Access")?iTableID=@ViewData["iTableID"].ToString()"
+             name="formactionModelValueFrame_@ViewData["iTableID"].ToString()" width="100%" frameborder="0" height="99%"></iframe>
+    </div>
+
+</div>
+<script type="text/javascript">
+    function do_@ViewData["iTableID"]Search(value, name) {
+        $('#modelValueList_@ViewData["iTableID"].ToString()').datagrid('load', {
+            sField: name,
+            sKeyValue: value
+        });
+    }
+
+    //清空表单
+    function clear_@ViewData["iTableID"]Form()
+    {
+        window.frames["formactionModelValueFrame_@ViewData["iTableID"].ToString()"].clearForm();
+    }
+    function edit_@ViewData["iTableID"]ModelValue() {
+        debugger;
+        var row = $('#modelValueList_@ViewData["iTableID"].ToString()').datagrid('getSelected');
+        var vipcode=row.VIPCode;
+        var acceessUrl = '@Url.Content("~/ModelValue/Edit?ID=")' + row.ID+'&VIPCode='+vipcode;
+        if (row) {
+            $("#modelValuePanel_@ViewData["iTableID"].ToString()").dialog("open");
+            window.frames["formactionModelValueFrame_@ViewData["iTableID"].ToString()"].getModelValueInfo(row.ID);
+            
+            $("#btnModelValueSave_@ViewData["iTableID"].ToString()").attr("href", "javascript:save_@ViewData["iTableID"]ModelValue('" + acceessUrl + "')");
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要编辑的信息.");
+        }
+    }
+
+    function delete_@ViewData["iTableID"]ModelValue() {
+        var row = $('#modelValueList_@ViewData["iTableID"].ToString()').datagrid('getSelected');
+        if (row) {
+            $.messager.confirm('提示', '确定删除该信息吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "@Url.Content("~/ModelValue/Delete/")" + row.ID,
+                        success: function (result) {
+                            if (result == "yes") {
+                                $('#modelValueList_@ViewData["iTableID"].ToString()').datagrid('reload');
+                            }
+                            else {
+                                $.messager.alert('提醒', result);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要删除的信息.");
+        }
+    }
+
+    $(function () {
+        $('#modelValueList_@ViewData["iTableID"].ToString()').datagrid({
+            url: '@Url.Content("~/ModelValue/List")?iTableID=@ViewData["iTableID"].ToString()',
+            border: false,
+            pagination: true,
+            toolbar: "#modelValueToolbar_@ViewData["iTableID"].ToString()",
+            singleSelect: true,
+            loadMsg: "正在加载...",
+            columns: @Html.Raw(ViewData["columns"])
+            });
+    });
+
+
+    function add_@ViewData["iTableID"]ModelValue()
+    {
+        $("#formactionModelValueFrame_@ViewData["iTableID"].ToString()").attr("src", "@Url.Content("~/ModelValue/Access")?iTableID=@ViewData["iTableID"].ToString()");//重新刷新弹出页面
+        $("#modelValuePanel_@ViewData["iTableID"].ToString()").dialog("open");
+        $("#btnModelValueSave_@ViewData["iTableID"].ToString()").attr("href", "javascript:save_@ViewData["iTableID"]ModelValue('@Url.Content("~/ModelValue/Add")?iTableID=@ViewData["iTableID"].ToString()')");
+    }
+
+    //提交表单保存
+    function save_@ViewData["iTableID"]ModelValue(url)
+    {
+        debugger;
+        window.frames["formactionModelValueFrame_@ViewData["iTableID"].ToString()"].saveModelItem(url);
+    }
+
+    //刷新列表数据
+    function refresh_@ViewData["iTableID"]ModelValueList() {
+        $('#modelValueList_@ViewData["iTableID"].ToString()').datagrid('reload');//刷新列表数据
+        $("#modelValuePanel_@ViewData["iTableID"].ToString()").dialog("close");//关闭弹出框
+    }
+
+    //提示框
+    function message_@ViewData["iTableID"]Alert(msg) {
+        $.messager.alert('提醒', msg);
+    }
+</script>

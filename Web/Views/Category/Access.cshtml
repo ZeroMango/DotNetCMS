@@ -1,0 +1,223 @@
+﻿@{
+    ViewBag.Title = "Access";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery.form.js"></script>
+<link href="~/Editor/themes/default/default.css" rel="stylesheet" />
+<link href="~/Editor/plugins/code/prettify.css" rel="stylesheet" />
+<script src="~/Editor/kindeditor.js"></script>
+<script src="~/Editor/lang/zh_CN.js"></script>
+<script src="~/Editor/plugins/code/prettify.js"></script>
+<form id="categoryForm" name="categoryForm" method="post">
+    <table>
+        <tr>
+            <td>所属栏目:</td>
+            <td>
+                <input id="i_PID" name="i_PID" class="easyui-combotree" style="width: 305px;" data-options="url:'@Url.Content("~/category/TreeJsonList")',required:true">
+            </td>
+        </tr>
+        <tr>
+            <td>栏目名称:</td>
+            <td>
+                <input class="easyui-validatebox" type="text" name="s_Name" style="width: 300px;" data-options="required:true" maxlength="100"
+                    missingmessage="请输入栏目名称." /></td>
+        </tr>
+        <tr>
+            <td>栏目英文名称:</td>
+            <td>
+                <input class="easyui-validatebox" type="text" style="width: 300px;" name="s_EnName" data-options="required:true,validType:'english'" maxlength="25"
+                    missingmessage="请输入栏目英文名称." invalidmessage="只能输入英文与数字的组合." />
+            </td>
+        </tr>
+        <tr>
+            <td>排序编号:</td>
+            <td>
+                <input type="text" name="i_Order" maxlength="10" missingmessage="请输入排序编号." class="easyui-numberbox" data-options="min:0" /></td>
+        </tr>
+        <tr>
+            <td>是否为跳转栏目:</td>
+            <td>
+                <input type="checkbox" id="b_IsRedirect" /><label for="b_IsRedirect">是</label>
+                <input type="hidden" name="b_IsRedirect" value="false" />
+                <input class="easyui-validatebox" style="width: 300px;" type="text" name="s_RedirectUrl" maxlength="200" />
+            </td>
+        </tr>
+        <tr>
+            <td>是否显示在导航栏:</td>
+            <td>
+                <input type="checkbox" id="b_IsShowNav" /><label for="b_IsShowNav">是</label>
+                <input type="hidden" name="b_IsShowNav" value="false" />
+            </td>
+        </tr>
+        <tr>
+            <td>栏目模板:</td>
+            <td>
+                <input name="i_TemplateID" class="easyui-combobox" data-options="url:'@Url.Content("~/template/ComboBoxList")',required:true,valueField:'id',  
+    textField:'text',editable:false" style="width:305px;">
+            </td>
+        </tr>
+        <tr>
+            <td>是否为内容栏目:</td>
+            <td>
+                <input type="checkbox" id="b_IsContentItem" /><label for="b_IsContentItem">是</label>
+                <input type="hidden" name="b_IsContentItem" value="false" />
+            </td>
+        </tr>
+        <tr>
+            <td>栏目列表模板:</td>
+            <td>
+                <input name="i_ContentTemplateID" class="easyui-combobox" data-options="url:'@Url.Content("~/template/ComboBoxList")',required:true,valueField:'id',  
+    textField:'text',editable:false" style="width:305px;">
+            </td>
+        </tr>
+        <tr>
+            <td>栏目导图:</td>
+            <td>
+                <input class="easyui-validatebox" style="width: 300px;" type="text" readonly="true" name="s_ImgPath" id="s_CategoryImgPath" maxlength="255" />
+                <input type="button" value="上传" onclick="browserCategoryFile()" />
+                <span id="uploadCategoryTip" class="red"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>栏目内容:</td>
+            <td>
+                <textarea id="s_Content" name="s_Content"></textarea>
+                <input type="hidden" id="replaceContent" name="s_Content" />@*替代的内容*@
+            </td>
+        </tr>
+        @*<tr>
+            <td>栏目页面生成规则:</td>
+            <td>
+                <input class="easyui-validatebox" type="text" name="s_GenarateRule" data-options="required:true"
+                    missingmessage="请输入栏目页面生成规则." maxlength="50" />
+            </td>
+        </tr>
+        <tr>
+            <td>栏目列表页面生成规则:</td>
+            <td>
+                <input class="easyui-validatebox" type="text" name="s_ListGenarateRule" data-options="required:true"
+                    missingmessage="请输入栏目列表页面生成规则." maxlength="50" />
+            </td>
+        </tr>*@
+        <tr>
+            <td>栏目关键字:</td>
+            <td>
+                <input class="easyui-validatebox" style="width: 300px;" type="text" name="s_KeyWord" maxlength="100" />
+                多个关键字请用英文逗号隔开.
+            </td>
+        </tr>
+        <tr>
+            <td>栏目描述:</td>
+            <td>
+                <input class="easyui-validatebox" style="width: 300px;" type="text" name="s_Description" />
+            </td>
+        </tr>
+    </table>
+</form>
+<div id="uploadCategoryFormPanel" class="easyui-dialog" title="图片上传" style="width: 400px; height: 80px; padding: 10px;" closed="true"
+    data-options="resizable:false,modal:true">
+    <form id="uploadCategoryForm" action="@Url.Content("~/Upload/Upload")?dir=image" enctype="multipart/form-data" method="post">
+        <input type="file" name="imgFile" id="imgCategoryFile" />
+        <input type="submit" value="确定" id="btnCategorySubmit" />
+    </form>
+</div>
+<script type="text/javascript">
+
+    /*
+    提交表单
+    */
+    function saveCategory(url) {
+        if (window.editor) {
+            $('#s_Content').val(window.editor.html());//将编辑器的内容赋给textarea
+        }
+        $('#categoryForm').form('submit', {
+            url: url,
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                if (result == "yes") {
+                    window.parent.refreshCategoryList();
+                }
+                else {
+                    window.parent.messageAlert(result);
+                }
+            }
+        });
+    }
+
+    //加载所要修改的栏目信息
+    function getCategoryInfo(id) {
+        if (id != undefined && id != 'undefined') {
+            $('#categoryForm').form('load', "@Url.Content("~/Category/Edit/")" + id + "?" + new Date().getTime());
+        }
+    }
+
+    //页面加载完成
+    $(function () {
+        $('#categoryForm').form({
+            onLoadSuccess: function (data) {//表单数据加载完后
+                window.editor.html($("#replaceContent").val());//设置富文本编辑器的值
+                $("form input[type=checkbox]").each(function () {
+                    if ($("input[name=" + $(this).attr("id") + "]").val() == "true") {
+                        $(this).attr("checked", true);
+                    }
+                    else {
+                        $(this).attr("checked", false);
+                    }
+                });
+            }
+        });
+
+        $('#i_PID').combotree('setValue', 0);
+        $("form input[type=checkbox]").each(function () {
+            $(this).click(function () {//让复选框选择与否状态值 赋给隐藏变量
+                if ($(this).attr("checked")) {
+                    $("input[name=" + $(this).attr("id") + "]").val("true");
+                }
+                else {
+                    $("input[name=" + $(this).attr("id") + "]").val("false");
+                }
+            });
+        });
+        KindEditor.ready(function (K) {
+            window.editor = K.create('#s_Content', { uploadJson: '@Url.Content("~/Upload/Upload")' });
+            getCategoryInfo(@Request.QueryString["id"]);
+        });
+    });
+
+        //模拟点击文件浏览按钮
+        function browserCategoryFile() {
+            $("#uploadCategoryFormPanel").dialog("open");
+        }
+
+
+        //图片上传表单提交
+        $('#uploadCategoryForm').submit(function () {
+            $("#uploadCategoryTip").html("正在上传...");
+            var tempHtml = $("#uploadCategoryForm").html();
+            // 提交表单
+            $(this).ajaxSubmit(function (result) {
+                try {
+                    var jsonResult = eval('(' + result + ')');
+                    if (jsonResult) {
+                        if (jsonResult.error == 0) {
+                            $("#s_CategoryImgPath").val(jsonResult.url);
+                            $("#uploadCategoryTip").html("上传成功.");
+                        }
+                        else {
+                            $("#uploadCategoryTip").html("上传失败.");
+                        }
+                    }
+                    else {
+                        $("#uploadCategoryTip").html("上传失败.");
+                    }
+                } catch (e) {
+                    $("#uploadCategoryTip").html(result);//显示错误信息
+                }
+                $("#uploadCategoryForm").html(tempHtml);
+            });
+            $("#uploadCategoryFormPanel").dialog("close");
+            return false;
+        });
+</script>

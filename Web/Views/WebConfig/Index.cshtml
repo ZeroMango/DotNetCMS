@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <form id="webconfigForm" name="webconfigForm" method="post">
+        <input type="hidden" name="ID" id="ID" />
+        <table>
+            <tr>
+                <td>站点名称:</td>
+                <td>
+                    <input class="easyui-validatebox" type="text" style="width: 300px;" name="s_SiteName" data-options="required:true" maxlength="20"
+                        missingmessage="请输入站点名称." /></td>
+            </tr>
+            <tr>
+                <td>站点域名:</td>
+                <td>
+                    <input class="easyui-validatebox" type="text" style="width: 300px;" name="s_SiteDNS" maxlength="30" />
+                </td>
+            </tr>
+            <tr>
+                <td>列表显示记录数:</td>
+                <td>
+                    <input class="easyui-number" data-options="required:true" missingmessage="请输入列表显示记录数." type="text" style="width: 300px;" name="i_PageSize" maxlength="2" />
+                </td>
+            </tr>
+            <tr>
+                <td>联系邮箱:</td>
+                <td>
+                    <input class="easyui-validatebox" type="text" style="width: 300px;" name="s_Email" maxlength="30" />
+                </td>
+            </tr>
+            <tr>
+                <td>联系电话:</td>
+                <td>
+                    <input class="easyui-validatebox" type="text" style="width: 300px;" name="s_Phone" maxlength="30" />
+                </td>
+            </tr>
+            <tr>
+                <td>联系地址:</td>
+                <td>
+                    <input class="easyui-validatebox" type="text" style="width: 300px;" name="s_Address" maxlength="30" />
+                </td>
+            </tr>
+            <tr>
+                <td>网站关键字:</td>
+                <td>
+                    <input class="easyui-validatebox" type="text" style="width: 300px;" name="s_KeyWord" maxlength="20" />
+                    多个关键字请用英文逗号隔开.
+                </td>
+            </tr>
+            <tr>
+                <td>网站描述:</td>
+                <td>
+                    <textarea class="easyui-validatebox" style="width: 300px; height: 50px;" name="s_Description"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>版权信息:</td>
+                <td>
+                    <textarea class="easyui-validatebox" style="width: 300px; height: 50px;" name="s_CopyRight"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>备案信息:</td>
+                <td>
+                    <textarea class="easyui-validatebox" style="width: 300px; height: 50px;" name="s_Filing"></textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div id="action-buttons-webconfig">
+        <a href="javascript:void(0)" id="btnWebConfigSave" class="easyui-linkbutton" iconcls="icon-ok" onclick="saveWebConfig()">保存</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function saveWebConfig() {
+        $('#btnWebConfigSave').linkbutton('disable');
+        $('#webconfigForm').form('submit', {
+            url: '@Url.Content("/WebConfig/Edit/")1',
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                if (result == "yes") {
+                    $.messager.alert('提醒', "操作成功.");
+                }
+                else {
+                    $.messager.alert('提醒', result);
+                }
+                $('#btnWebConfigSave').linkbutton('enable');
+            }
+        });
+    }
+    function loadWebConfig(id) {
+        $('#webconfigForm').form('load', '@Url.Content("~/WebConfig/Edit/")' + id);//加载网站配置信息
+    }
+    $(function () {
+        //loadWebConfig(0);
+        loadWebConfig(2);
+    });
+</script>

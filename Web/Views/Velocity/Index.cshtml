@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div id="velocityGenerate" class="easyui-layout" style="width: 99%; height: 500px;" fit="true">
+        <div data-options="region:'west',title:'栏目列表',split:true" title="West" style="width: 300px;">
+            <ul id="categoryTreeList"></ul>
+        </div>
+        <div data-options="region:'center',title:'操作区'">
+            <div style="margin: 5px; padding: 5px; border: 1px solid #ddd">
+                <input type="checkbox" id="checkAllTree" onclick="checkAllTree()" /><label for="checkAllTree">全选/反选</label>
+                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="generateDefault()">生成首页</a>
+                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="generateCategory()">生成选中栏目页</a>
+                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="generateArticle()">生成选中栏目文章页</a>
+            </div>
+            <div class="tip" id="generateTip">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    //全选反选
+    function checkAllTree() {
+        if ($("#checkAllTree").attr("checked")) {//全选
+            var nodes = $('#categoryTreeList').tree("getChecked", "unchecked");
+            for (var i = 0; i < nodes.length; i++) {
+                $('#categoryTreeList').tree("check", nodes[i].target);
+            }
+        }
+        else {//全不选
+            uncheckAllTree();
+        }
+    }
+    //清空选中
+    function uncheckAllTree() {
+        var nodes = $('#categoryTreeList').tree("getChecked");
+        for (var i = 0; i < nodes.length; i++) {
+            $('#categoryTreeList').tree("uncheck", nodes[i].target);
+        }
+    }
+    $(function () {
+        $('#categoryTreeList').tree({
+            url: '@Url.Content("/Category/TreeJsonList?bShowTop=false")',
+            checkbox: true,
+            lines: true,
+            cascadeCheck: false
+        });
+    });
+
+        //生成首页
+        function generateDefault() {
+            $("#generateTip").html("正在生成首页...");
+            $.ajax({
+                url: "@Url.Content("~/Velocity/GenerateDefault")",
+                type: "post",
+                data: null,
+                success: function (result) {
+                    if (result == "yes") {
+                        $("#generateTip").html("首页生成成功.");
+                        uncheckAllTree();
+                    }
+                    else {
+                        $("#generateTip").html(result);
+                    }
+                    $("#checkAllTree").attr("checked", false);//不选 全选/反选复选框
+                }
+            });
+        }
+
+        //生成选中的栏目页
+        function generateCategory() {
+            var nodes = $('#categoryTreeList').tree('getChecked');
+            if (nodes.length == 0) {
+                $.messager.alert('提醒', "请选择所要生成的栏目.");
+                return;
+            }
+
+            $("#generateTip").html("正在生成栏目页面...");
+            var ids = "sID=";
+            for (var i = 0; i < nodes.length; i++) {
+                ids += nodes[i].id + ",";
+            }
+            $.ajax({
+                url: "@Url.Content("~/Velocity/GenerateCategoryByIDS")",
+                type: "post",
+                data: ids,
+                success: function (result) {
+                    if (result == "yes") {
+                        $("#generateTip").html("栏目页面生成成功.");
+                        uncheckAllTree();
+                    }
+                    else {
+                        $("#generateTip").html(result);
+                    }
+                    $("#checkAllTree").attr("checked", false);//不选 全选/反选复选框
+                }
+            });
+        }
+
+        //生成选中栏目下的文章
+        function generateArticle() {
+            var nodes = $('#categoryTreeList').tree('getChecked');
+            if (nodes.length == 0) {
+                $.messager.alert('提醒', "请选择所要生成文章对应的栏目.");
+                return;
+            }
+            $("#generateTip").html("正在生成文章页面...");
+            var ids = "sID=";
+            for (var i = 0; i < nodes.length; i++) {
+                ids += nodes[i].id + ",";
+            }
+            $.ajax({
+                url: "@Url.Content("~/Velocity/GenerateArticleByCIDS")",
+            type: "post",
+            data: ids,
+            success: function (result) {
+                if (result == "yes") {
+                    $("#generateTip").html("文章页面生成成功.");
+                    uncheckAllTree();
+                }
+                else {
+                    $("#generateTip").html(result);
+                }
+                $("#checkAllTree").attr("checked", false);//不选 全选/反选复选框
+            }
+        });
+    }
+</script>

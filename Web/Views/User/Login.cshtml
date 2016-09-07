@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "用户登录-小型CMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="win" class="easyui-window" title="用户登录" style="width: 500px; height: 300px"
+    data-options="modal:true,closable:false,minimizable:false,maximizable:false">
+    <form id="loginForm" action="/" method="post">
+        <table>
+            <tr>
+                <td>用户名:</td>
+                <td>
+                    <input name="sUserName" type="text" style="width:150px;" class="easyui-validatebox" data-options="required:true,validType:'length[3,20]'" missingmessage="请输入用户名." invalidmessage="用户名长度介于3至20之间." /></td>
+            </tr>
+            <tr>
+                <td>密码:</td>
+                <td>
+                    <input name="sPassword" id="sPassword" style="width:150px;" type="password" class="easyui-validatebox" data-options="required:true,validType:'length[6,20]'" missingmessage="请输入密码." invalidmessage="密码长度介于6至20之间." /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:login()">登录</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+    function login() {
+        $('#loginForm').form('submit', {
+            url: "@Url.Content("~/User/Login")",
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                if (result == "yes") {
+                    window.location.href = '@Url.Content("~/Default/Index")';
+                }
+                else {
+                    alert(result);
+                }
+            }
+        });
+    }
+    $(function () {
+        $("#sPassword").keydown(function (e) {
+            if (e.keyCode == 13) {
+                e.preventDefault(); //阻止冒泡
+                login();
+                return;
+            }
+        });
+    });
+</script>

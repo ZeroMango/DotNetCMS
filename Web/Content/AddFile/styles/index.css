@@ -1,0 +1,281 @@
+/*主体部分*/
+/*动态部分*/
+.eus-box {
+	width: 100%;
+	height: auto;
+	margin: 20px 0px 30px 0px ;
+}
+.eus-main {
+	width:1000px;
+	height:auto;
+	margin:0 auto;
+}
+.eus-dynamic {
+	width:1000px;
+	height:auto;
+}
+.dynamic-left {
+	float: left;
+	width: 360px;
+	height: 280px;
+	overflow: hidden;
+	background: url(../images/pic-bg.png) no-repeat;
+}
+.dynamic-middle {
+	float: left;
+	width: 410px;
+	height: 280px;
+	margin-left: 13px;
+	overflow: hidden;
+	background: #f8f7f8;
+}
+.newsList ul {
+	float: left;
+	width: 410px;
+	padding: 10px 0;
+*padding: 0;
+}
+.newsList li {
+	font-size: 14px;
+	padding: 0 0 0 41px;
+*line-height:10px;
+	background: url(http://img.ifeng.com/list/icon_66.gif) no-repeat 16px 10px;
+*background: url(http://img.ifeng.com/list/icon_66.gif) no-repeat 16px 14px;
+}
+.newsList li h4 {
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	float: right;
+	font-weight: normal;
+	line-height: 26px;
+*line-height: 30px;
+	color: #999;
+}
+.newsList li a {
+	color: #333;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 20em;
+	display: block;
+	line-height: 29px;
+*line-height: 20px;
+	white-space: nowrap;
+}
+.dynamic-right {
+	float:right;
+	width:200px;
+	height:auto;
+}
+.dynamic-right-top {
+	width: 200px;
+	position: relative;
+	height: 130px;
+}
+.top-bg {
+	background:url(../images/vip.png) no-repeat;
+}
+.vip-name {
+	position: absolute;
+	top: 49px;
+	left: 15px;
+	line-height: 20px;
+	color: #666;
+	font-size: 12px;
+}
+.dynamic-right-top .vip-color1 a {
+	font-weight: bold;
+	color:#ff6600;
+	text-decoration:underline;
+}
+.vip-margin {
+	margin-top:23px;
+	background:url(../images/contact.png) no-repeat;
+}
+.dynamic-right-top .vip-color2 a {
+	font-weight: bold;
+	color: #277cd5;
+	font-style:normal;
+}
+.dynamic-right-top span {
+	position: absolute;
+	bottom: 21px;
+	left: 18px;
+}
+.dynamic-right-top span a {
+	color: #fff;
+	font-size: 12px;
+}
+/*动态部分*/
+/*标语部分*/
+
+.eus-slogan {
+	width: 1000px;
+	margin: 20px 0px 0px 0px;
+}
+.eus-slogan img {
+	width:1000px;
+	height:99px;
+	overflow:hidden;
+}
+/*标语部分*/
+
+
+
+
+
+/*活动部分*/
+.eus-activity {
+	margin-top:20px;
+	width: auto;
+	height: auto;
+	border: 1px solid #c3c3c3;
+	padding-bottom: 15px;
+	border-top-right-radius: 5px;
+	-moz-border-top-right-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	-moz-border-top-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+}
+.eus-activity h3 {
+	border-top-right-radius: 5px;
+	-moz-border-top-right-radius:5px;
+	-webkit-border-top-right-radius: 10px;
+	border-top-left-radius: 5px;
+	-moz-border-top-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	height: 30px;
+	border-bottom: solid 1px #c3c3c3;
+	font-size: 14px;
+	text-indent: 30px;
+	color:#3564b6;
+	font-weight: bold;
+	line-height: 30px;
+	background: linear-gradient(top#ffffff, #ececec);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#ececec));
+	background: -moz-linear-gradient(top, #ececec, #ffffff);
+	background: -o-linear-gradient(top, #ececec, #ffffff);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ececec');
+}
+.eus-activity h3 .more {
+	position: relative;
+	float: right;
+	color:#3564b6;
+	font-size: 14px;
+	font-weight: bold;
+	padding-right:30px;
+}
+.activity-detail {
+	width:1000px;
+}
+.activity-detail li {
+	width: 230px;
+	margin-left: 16px;
+	margin-top: 15px;
+	float: left;
+}
+.detail-text {
+	width: 230px;
+}
+.detail-text {
+	margin-top:6px;
+}
+.detail-text p {
+	color: #333333;
+	width: 230px;
+	height: 45px;
+	line-height: 25px;
+	overflow: hidden;
+	font-size: 14px;
+	text-align: center;
+	cursor: pointer;
+}
+/*活动部分*/
+
+
+/*企业推荐*/
+
+
+.eus-enterprise li {
+	width: 217px;
+	margin-left: 16px;
+	height: 167px;
+	margin-top: 15px;
+	overflow: hidden;
+	padding: 0px 15px 0px 0px;
+	float: left;
+}
+.eus-enterprise .eus-list {
+	border-right: 1px dashed #c3c3c3;
+}
+.enterprise-text {
+	margin-top: 6px;
+	margin-top: 6px;
+	float: left;
+}
+.enterprise-text p {
+	color: #333333;
+	width: 217px;
+	line-height: 25px;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	font-size: 14px;
+	text-align: left;
+	cursor: pointer;
+}
+.eus-enterprise li img {
+	float:left;
+}
+.eus-enterprise h1 {
+	float: right;
+	line-height: 22px;
+	width: 95px;
+	margin-top: 20px;
+	font-size: 14px; height:22px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.eus-enterprise p .text-color {
+	color:#3564b6;
+}
+/*企业推荐*/
+/*滚动图片*/
+.eus-scrol {
+width: 1000px;
+height: auto;
+}
+.eus-scrol h2 {
+height: 50px;
+font-size: 14px;
+line-height: 56px;
+display: block;
+color: #3564b6;
+}
+.scroll_div li {
+	padding:0px 5px;
+}
+.scroll_div {
+	width: 1000px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.scroll_div img {
+	width:165px;
+	height:65px;
+	margin: auto 0px;
+}
+#scroll_begin, #scroll_end, #scroll_begin ul, #scroll_end ul, #scroll_begin ul li, #scroll_end ul li {
+	display:inline;
+	margin:0px;
+}
+
+
+/*滚动图片*/
+
+
+
+
+
+
+/*主体部分*/

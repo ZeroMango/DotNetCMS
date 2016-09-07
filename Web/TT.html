@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+
+
+    <script type="text/javascript" name="baidu-tc-cerfication" data-appid="6904123" src="http://apps.bdimg.com/cloudaapi/lightapp.js"></script>
+
+
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="四川华美德贸易有限公司" />
+    <meta name="description" content="" />
+    <meta name="baidu-site-verification" content="3RbhGIWvli" />
+    <title>网站首页 - 四川华美德贸易有限公司</title>
+    <link href="/HtmlStlye/css/public.css" rel="stylesheet" type="text/css">
+<link href="/HtmlStlye/css/middle.css" rel="stylesheet" type="text/css">
+<link href="/HtmlStlye/img/logo.png" rel="shortcut icon">
+<script src="/HtmlStlye/js/jQuery-1.8.3.js"></script>
+<script src="/HtmlStlye/js/function.js"></script>
+<script src="/HtmlStlye/js/scrol.js"></script>    <link href="/HtmlStlye/css/banner.css"  rel="stylesheet" type="text/css">
+    </head>
+	<body>
+<div class="header">
+			<div class="public">
+ <div class="header-left">
+				<span>
+        Hi,欢迎来到四川省华美德贸易有限公司官网！<a onclick="OpenLogin()" class="btn">  请登录</a>  <a href="/index/reg.html" class="btn"style="color:#a2080e">  免费注册</a><span id ="userN" name ="show" class="showName1 ">用户你好</span><input name="show" id ="zhuxiao" class="showName" type="button" value="注销登录" /></span>
+				<span class="right">联系电话：028-85730971 </span>
+</div>
+			</div>
+		</div>
+		<div class="nav">
+			<a href="/" class="nav-home"><img src="/HtmlStlye/img/logo.png"></a>
+			<div class="nav-list">
+            	       <a target="_self" title="网站首页" href="/">网站首页</a>
+	    	        <a target="_self" title="公司荣誉" href="/companyHonors.html">公司荣誉</a>
+	    	        <a target="_self" title="新闻中心" href="/news.html">新闻中心</a>
+	    	        <a target="_self" title="公司产品" href="/products/healthCare.html">公司产品</a>
+                    <a target="_self" title="访客留言" href="/contact.html">访客留言</a>
+                    <a target="_self" title="VIP服务区" href="/contact.html">VIP服务区</a>
+	    	        <a target="_self" title="保健常识" href="/healthy.html">保健常识</a>
+	    	        <a target="_self" title="联系我们" href="/contact.html">联系我们</a>
+	    			</div>
+		</div>
+<div class="mask" style="display:none">
+    <div class="mask-content">
+        <h4>
+            <span></span>
+            登录华美德保健官网
+            <a onclick="CloseLogin()" class="right" style="padding:0px 10px">× </a>
+        </h4>
+        <form class="loginFrom">
+            <input type="text" placeholder="账号" name="UserName" id="UserName1">
+            <input type="password" name="UserPassword" placeholder="密码" id="UserPassword1">
+            <p>
+                <input type="checkbox" id="loginbar">
+<label for=loginbar>自动登录</label>
+                <a href="javascript:void(0)" style="float:right">忘记密码?</a>
+            </p>
+            <input type="button" id="btnlogin" value="登 录">
+        </form>
+        <p>
+            没有账号？
+            <a href="/index/reg.html">立即注册</a>
+        </p>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $("#btnlogin").click(function () {
+            if ($("#UserName1").text() != "") {
+                return;
+            }
+            var params = $(".loginFrom").serialize();
+            var date = new Date();
+            var mydate = date.getFullYear() + date.getMonth() + date.getDate() + date.getHours() + date.getMinutes() + date.getSeconds();
+            jQuery.post("/Modelvalue/Add?iTableID=49", params + "&addtime=" + mydate + "&type=messageBox2", function (data) {
+                if (data == "yes") {
+                    var userName = document.getElementById("UserName1").value;
+                    var s = sessionStorage.setItem("0", userName);
+                    window.location.href = "/index.html";
+                }
+
+                else {
+                    alert("用户名或密码错误");
+                    $("#btnre").click();
+
+                }
+
+            })
+
+        })
+    })
+
+</script><script>
+             $(".nav-list a").each(function () {
+                 var thisUrl = $(this).attr("href");
+                 if (thisUrl != "/" && window.location.href.indexOf(thisUrl) > -1) {
+                     $(this).addClass("checked");
+                 }
+             });
+
+             function OpenLogin() {
+                 $(".mask").show();
+                 $("body").css("overflow", "hidden");
+             }
+             function CloseLogin() {
+                 $(".mask").hide();
+                 $("body").css("overflow", "auto");
+             }
+
+
+</script>    
+        <script>
+                 $(".nav-list a").eq(0).addClass("checked");
+    </script>
+         <div class="center">
+        <div class="center_left">
+            <object width="90%" height="350" style="margin-bottom:20px;margin-left: 34px;margin-top: 32px;" data="http://player.ku6.com/inside/RuVBHrS43U6pa3IOp5Thyg../v.swf&amp;adss=0" id="videoPlayer" type="application/x-shockwave-flash">
+                <param value="transparent" name="wmode"><param value="always" name="allowScriptAccess"><param value="true" name="allowFullScreen">
+                <param value="adss=0111" name="flashvars">
+            </object>
+        </div>
+        <div class="center_right">
+            <div class="ct_r_t">
+                四川华美德贸易有限公司是一家集医药卫生、电健康管理咨询于一体的大型综合贸易企业。公司坐地灵的“天府之国”-四川成都，由行业内著名的共同
+            出资打造，注册资金为500万元。公司经营方法销售理念独特有效，客户群体遍及大江南北。着眼于全国...
+                <a href="#" class="pos_more">MORE》</a>
+            </div>
+            <div class="ct_r_b">
+                <div class="ct_r_b_l">
+                    <span style="display: inline-block;width: 30px;float: left">地址:</span><span style="display: inline-block;width: 174px;">四川省成都市高新区汇川街166号中海国际B幢709号</span></div>
+                <p>电话:028-66036666&nbsp;&nbsp;4000-1353-66</p>
+                <p>传真:028-85730971</p>
+                <p>网站:http://www.huameide888.com/</p>
+            </div>
+        </div>
+    </div>
+    <!--<div class="artile">
+       <!-- <div class="artile-left">
+            <a href="/companyHonors.html" class="marklinkour">
+					<span class="morelink">
+						更多<i></i>
+					</span>
+            </a>-->
+            <!--<ul class="honor-item">
+                <li>        <div style="text-align:justify;">
+	<span style="font-size:12px;line-height:1.5;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 四川华美德贸易有限公司是一家集医药卫生、电子商务和健康管理咨询于一体的大型综合贸易企业。公司坐落于人杰地灵的“天府之国”—四川成都，由行业内著名的商界领袖共同出资打造，注册资金500万元。公司经营方法成熟可靠，销售理念独特有效，客户群体遍及大江南北。公司立足于蓉城，着眼于全国。目前已经在北京、上海、天津、重庆、广东、山东等全国20多个省、直辖市开展了业务往来。公司在发展中积极融入新媒体，与中央电视台、央视网联手，成为广告合作伙伴，上央视网，看华美德，更是让华美德品牌家喻户晓。<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 公司以“为全人类健康保驾护航”为发展目标，以“创新”为动力，于2015年与中国医学科学院药物研究所进行深度的战略合作，推出了一系列高品质的健康产品。在健康产业产品日趋同质化的今天，华美德的极具差异化的优质产品一经推出就获得了得到了无数消费者的认可和喜爱，赢得了市场的广泛赞誉！<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp; “守卫健康，享受生活每一天”是华美德的核心价值观。华美德认为，诚信比聪明重要，美德比才华重要，健康比金钱重要；华美德追求在快乐工作的同时以健康的身体去享受我们的生活。华美德以这样个性鲜明的企业精神汇聚行业精英，打造了一个尊重个体价值凝聚集体智慧，创新，诚信，快乐的企业团队。<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 公司经营以诚信为本，坚持走求同存异，共谋多赢，健康和谐，发展创新，服务客户的可持续发展之路，力争在未来五年成为鼎立全国的健康产业贸易航母！</span> 
+</div>
+</li>
+            </ul>-->
+           <!-- <a href="/healthy.html" class="marklink baojian">
+					<span class="morelink">
+						更多<i></i>
+					</span>
+            </a>-->
+
+
+
+
+
+
+            <!--<ul class="honor-item healthy-item">
+                                                                <li><a href="/healthy/2015-11-09/199.html">[] 赶黄草的特征</a>
+                </li>
+                                <li><a href="/healthy/2015-11-09/198.html">[] 三七的性能</a>
+                </li>
+                                <li><a href="/healthy/2015-11-09/197.html">[] 铁皮石斛的药用价值和食用方法</a>
+                </li>
+                                <li><a href="/healthy/2015-11-09/196.html">[] 天麻的作用</a>
+                </li>
+                                <li><a href="/healthy/2015-11-09/195.html">[] 藏红花的药理研究进展</a>
+                </li>
+                                            </ul>-->
+            <!--<a href="/contact.html" class="marklink lianxi"></a>
+
+            <ul class="honor-item">
+
+                <li>地址：四川省成都市高新区汇川街166号中海国际B幢709号</li>
+                <li>电话：028-66036666     4000-1353-66  </li>
+                <li>传真：028-85730971</li>
+                <li>邮箱：  </li>
+                <li>网站：http://www.huameide888.com/</li>
+            </ul>-->
+
+        <!--</div>-->
+     <!--   <div class="artile-right">
+<object width="100%" height="546" style="margin-bottom:20px" data="http://player.ku6.com/inside/RuVBHrS43U6pa3IOp5Thyg../v.swf&amp;adss=0" id="videoPlayer" type="application/x-shockwave-flash"><param value="transparent" name="wmode"><param value="always" name="allowScriptAccess"><param value="true" name="allowFullScreen"><param value="adss=0111" name="flashvars"></object>
+            <!--<div class="banner">
+                <script src="/HtmlStlye/js/banner/html5shiv.js"></script>
+                <script src="/HtmlStlye/js/banner/scroll.dev.js"></script>
+                <script src="/HtmlStlye/js/banner/slider.js"></script>
+                <script src="/HtmlStlye/js/banner/webapp.js"></script>
+                <div class="swipe">
+                    <ul id="slider">
+                    	                		                		                        <li><a href="#"><img title="公司未来发展的趋向" src="/attached/image/20151021/20151021190551_2040.png"></a></li>
+                                                <li><a href="#"><img title="中国医学科学院药物研究所" src="/attached/image/20151021/20151021190503_7735.png"></a></li>
+                                                <li><a href="#"><img title="暗示法士大夫似的上的感受到 是否认识" src="/attached/image/20151021/20151021190838_0537.png"></a></li>
+                                        		                    </ul>
+                    <div id="pagenavi">
+                        <a class="active"></a>
+                        <a></a>
+                        <a></a>
+                    </div>
+                </div>
+                <script>
+                    Banner();
+                </script>
+            </div>-->
+
+
+
+
+<!--            <a class="homelinks" href="/companyHonors.html">
+                <img src="/HtmlStlye/img/imger7.png" />
+                <span class="right">MORE>></span>
+            </a>-->
+            <!--<div class="culture">
+                                                
+                <a href="/companyHonors/dgdfgfd.html" class="culturea"><img title="国家科技进步奖" src="/attached/image/20151020/20151020101008_0069.png" width="100%"></a>
+
+                
+                <a href="/companyHonors/gyjuhg.html" class="culturea"><img title="中国医学科学院药物研究所" src="/attached/image/20151020/20151020100721_9839.png" width="100%"></a>
+
+                
+                <a href="/companyHonors/sdsgf.html" class="culturea"><img title="知本正源胶囊" src="/attached/image/20150921/20150921173816_0957.png" width="100%"></a>
+
+                                
+
+
+
+            </div>-->
+            <!--<a class="homelinks" href="/news.html">
+                <img src="/HtmlStlye/img/imger9.png" />
+                <span class="right">MORE>></span>
+            </a>-->
+            <!--<ul class="culture newslist">
+
+                                                                <li>
+                    <a href="/news/2015-10-20/189.html" class="newslist-img"><img title="中央电视台健康大讲堂启动" src="/attached/image/20151020/20151020120010_5833.jpg" width="100%"></a>
+                    <div class="newslist-right">
+                        <div>
+                            <a href="/news/2015-10-20/189.html" class="newslist-title"  title="中央电视台健康大讲堂启动">中央电视台健康大讲堂启动</a>
+                            <div class="newslist-time"></div>
+                        </div>
+                        <div class="newslist-description"></div>
+                        <a href="/news/2015-10-20/189.html"  class="newslist-link" title="查看详情">【 詳細 】</a>
+                    </div>
+                </li>
+                                <li>
+                    <a href="/news/2015-12-02/188.html" class="newslist-img"><img title="公司法人代表、董事长——邹彬" src="/attached/image/20151020/20151020115649_8119.png" width="100%"></a>
+                    <div class="newslist-right">
+                        <div>
+                            <a href="/news/2015-12-02/188.html" class="newslist-title"  title="公司法人代表、董事长——邹彬">公司法人代表、董事长——邹彬</a>
+                            <div class="newslist-time"></div>
+                        </div>
+                        <div class="newslist-description">早年出生在边远的山村，毕业于四川华西医科大学，靠着自己坚韧不拔的毅力和顽强的拼搏精神，在众多爱心人士</div>
+                        <a href="/news/2015-12-02/188.html"  class="newslist-link" title="查看详情">【 詳細 】</a>
+                    </div>
+                </li>
+                                            </ul>-->
+     <!--   </div>
+    </div>-->
+    <div class="footer">
+
+
+			<div class="public links">
+				<img src="/HtmlStlye/img/youqing.png" />
+				<a href="#" target="_Blank" >白虎</a>
+				<a href="http://www.sohu.com" target="target="_Blank"">搜狐</a>
+				<a href="http://www.renren.com" target="target="_Blank"">人人网</a>
+				<a href="http://www.sina.com.cn/" target="target="_Blank"">新浪</a>
+		
+
+
+			</div>
+			<div class="companycopyright">
+				<a class="ehecdcode" href="#"><img src="/attached/image/20151019/20151019144011_2567.jpg" ></a>
+				<div class="contactinfo">
+						Copyright &copy; 2009-2014 czvv.com  四川华美德贸易有限公司 版权所有<br />
+					蜀ICP备12005579号-6 All Rights Reserved<a href="http://www.ehecd.com" target="_blank">亿合科技技术支持</a><br />
+				 公司地址：四川省成都市高新区汇川街166号中海国际B幢709号</br>	
+                               联系电话：028-66036666     4000-1353-66    
+ 				邮箱：                             
+                               
+				</div>
+			</div>
+			
+		</div>
+</body>
+</html>

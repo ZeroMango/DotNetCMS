@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "SearchModel";
+}
+
+<div class="container">
+        <div class="head">
+            <div class="head_content">
+                <a href="/indx.html" class="logo">邮您慢递</a>
+                <div class="tools">
+                    <a title="点击设为首页" href="#" onclick="SetHome(this,window.location);">设为首页</a> | <a
+                        title="点击加入收藏" href="#" onclick="AddFavorite();">加入收藏</a> <span>客户热线:028-00008888</span>
+                </div>
+            </div>
+        </div>
+        #parse( "导航.html" )
+        <div class="content">
+             #parse( "左边动画.html" )
+            <div class="content_middle">
+                <div class="mainContent">
+                    
+    <div class="menu">
+        当前位置：<a href="/index.html">首页</a> > <span>订单查询</span></div>
+    <div class="htmlContent">
+        <div class="title">
+            订单查询结果</div>
+        <div class="ordersubmit">
+            <span class="ordertip1">尊敬的客户您好！感谢您预约邮您慢递，以下是您的订单详情，如有疑问，欢迎致电咨询我们售后客服(028-00006666)！</span></br>
+
+            <div class="msgtable">
+             <table>
+                 <tr><td>订单号：<span id="ddNum"></span></td><td>编码:<span id="postCode"></span></td></tr>
+                 <tr><td>寄件人姓名:<span id="senderName"></span></td><td>出发地址:<span id="startAddress"></span></td></tr>
+                 <tr><td>寄件人电话:<span id="senderTel"></span></td><td>接收地址:<span id="endAddress"></span></td></tr>
+                 <tr><td>寄件人QQ号：<span id="senderQQ"></span></td><td>现已送达地址:<span id="nowAddress"></span></td></tr>
+                 <tr><td colspan="2">收件人姓名:<span id="receiveName"></span></td></tr>
+                 <tr><td colspan="2">收件人电话:<span id="receiveTel"></span></td></tr>
+                 <tr><td colspan="2">签单时间:<span id="startTime"></span></td></tr>
+                 <tr><td colspan="2">送达时间:<span id="endTime"></span></td></tr>
+                 <tr><td colspan="2">寄出时间:<span id="postTime"></span></td></tr>
+             </table>
+            </div>
+        </div>
+    </div>
+
+                </div>
+            </div>
+             #parse( "右边动画.html" )
+        </div>
+        #parse( "底部.html" )
+    </div>

@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div style="margin-top: 15px;">
+        <div id="categoryToolbar">
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true" onclick="addCategory()">新增</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true" onclick="editCategory()">编辑</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" plain="true" onclick="deleteCategory()">删除</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-redo'" plain="true" onclick="generateCategory()">菜单生成到亿合公众平台</a>
+        </div>
+        <table id="categoryList" style="height: 400px;"></table>
+    </div>
+
+    <div id="action-buttons">
+        <a href="javascript:void(0)" id="btnCategorySave" class="easyui-linkbutton" iconcls="icon-ok" plain="true">保存</a>
+    </div>
+    <div id="categoryPanel" class="easyui-dialog" title="栏目信息设置" style="width: 850px; height: 600px; padding: 1px;" closed="true"
+        buttons="#action-buttons" data-options="iconCls:'icon-save',resizable:false,modal:true">
+        <iframe id="formFrame" name="formFrame" src="@Url.Content("~/Category/Access")?@DateTime.Now.ToString()" width="100%" frameborder="0" height="99%"></iframe>
+    </div>
+</div>
+<div id="probar"></div>
+<script type="text/javascript">
+    $(function () {
+        $('#categoryList').treegrid({
+            url: '@Url.Content("~/Category/List")',
+            idField: 'ID',
+            treeField: 's_Name',
+            toolbar: 'categoryToolbar',
+            columns: [[
+                { title: '栏目名称', field: 's_Name', width: 200 },
+                { title: '栏目英文名', field: 's_EnName', width: 120 },
+                {
+                    field: 'b_IsShowNav', title: '是否显示在导航栏上', width: 150, formatter: function (value, row, index) {
+                        if (value == true) {
+                            return "是";
+                        } else {
+                            return "否";
+                        }
+                    }
+                }
+            ]]
+        });
+    });
+    function addCategory() {
+        $("#formFrame").attr("src", "@Url.Content("~/Category/Access")");//重新刷新弹出页面
+        $("#categoryPanel").dialog("open");
+        $("#btnCategorySave").attr("href", "javascript:saveCategory('@Url.Content("~/Category/Add")')");
+    }
+    //把菜单生成到亿合软件的微信公众平台
+    function generateCategory() {
+        $.messager.confirm("提示消息", "菜单生成到微信公众平台,一级菜单1-3个二级菜单1-5个，确定生成？", function (r) {
+            if (r) {
+                $.messager.progress({
+                    //msg: '生成中...',
+                    text: '生成中...',
+                    interval:'500'
+                });
+
+                $.post("@Url.Content("~/category/GenerateMenuToWeiXin")", "", function (data) {
+                    $.messager.progress('close');
+                    $.messager.alert('提示消息',data);
+
+                })
+            }
+        })
+    }
+    function editCategory() {
+        var row = $('#categoryList').treegrid('getSelected');
+        if (row) {
+            $("#categoryPanel").dialog("open");
+            $("#formFrame").attr("src", "@Url.Content("~/Category/Access")?id=" + row.ID + "&" + new Date().getTime());
+            var acceessUrl = '@Url.Content("~/Category/Edit/")' + row.ID;
+            $("#btnCategorySave").attr("href", "javascript:saveCategory('" + acceessUrl + "')");
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要编辑的栏目.");
+        }
+    }
+
+    function deleteCategory() {
+        var row = $('#categoryList').treegrid('getSelected');
+        if (row) {
+            $.messager.confirm('提示', '删除栏目将会删除栏目下所有的文章，确定删除该模板吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "@Url.Content("~/Category/Delete/")" + row.ID,
+                        success: function (result) {
+                            if (result == "yes") {
+                                $('#categoryList').treegrid('reload');
+                            }
+                            else {
+                                $.messager.alert('提醒', result);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要删除的栏目.");
+        }
+    }
+    /*
+    提交表单
+    */
+    function saveCategory(url) {
+        window.frames["formFrame"].saveCategory(url);
+    }
+
+    //刷新列表数据
+    function refreshCategoryList() {
+        $('#categoryList').treegrid('reload');//刷新列表数据
+        $("#categoryPanel").dialog("close");//关闭弹出框
+        //$("#formFrame").attr("src", "@Url.Content("~/Category/Access")");//重新刷新弹出页面
+    }
+
+    //提示框
+    function messageAlert(msg) {
+        $.messager.alert('提醒', msg);
+    }
+</script>

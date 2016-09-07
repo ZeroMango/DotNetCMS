@@ -1,0 +1,227 @@
+﻿/*通用的CSS文件，用于各页面中间部分！*/
+
+
+/*首页*/
+.artile-left{float: left; width: 320px;}
+.artile-right{float: right; width: 664px;}
+.marklink{display: block; height: 90px; width: 320px; background: url(../img/honor.png) no-repeat;}
+.marklinkour{display: block; height: 90px; width: 320px; background: url(../img/companyimg.png) no-repeat;}
+.morelink{float: right; margin-top: 70px;}
+.morelink i{background: url(../img/morelink.png) no-repeat; padding: 2px 18px; _padding: 3px 23px;}
+.baojian{background-image: url(../img/imger5.png);}
+.lianxi{background-image: url(../img/imger6.png);}
+.honor-item{padding-left: 18px; margin: 10px 0px 26px;}
+.honor-item li{line-height: 20px; list-style: url(../img/li.png) ;}
+.healthy-item li{border-bottom: 1px dashed #766954; list-style: decimal;list-style-position: inside;}
+.banner{padding:8px 8px 9px 8px; height: 250px; background: url(../img/imger11.png) no-repeat; margin-bottom: 20px; background-position: 0px; background-size: 100% 100%;}
+.links img{float: left; margin-right: 88px;}
+.links a{display: block; float: left; width:120px; padding-left: 24px; background: url(../img/bottomlink.png) no-repeat; margin-top: 20px; padding-bottom:30px; background-position:0px -2px;}
+.links a:hover{background: url(../img/bottomlinked.png) no-repeat; color: #a2080e; background-position:0px -2px;}
+.culture{background: url("../img/bottomlinks.png") no-repeat scroll center top; padding-top: 20px; background-size: 100%; overflow: hidden;}
+.culturea{display: block; float: left; width: 208px; margin-left: 10px; margin-bottom: 20px; overflow: hidden;}
+.culturea img{width: 100%; }
+.newslist li{display: block; width: 100%; overflow: hidden; font-size: 14px; margin-bottom: 20px;}
+.newslist-img{float: left; display: block; height: 100px; width: 186px;}
+.newslist-img img{height: 100%; width: 100%;}
+.newslist-right{float: right; width: 470px;}
+.newslist-title{display:block; float: left; width: 370px; white-space: nowrap; text-overflow: ellipsis;font-weight: bold; overflow: hidden;}
+.newslist-time{float: right; width: 83px; text-align: right; font-weight: bold;}
+.newslist-description{width: 100%; line-height: 26px; height: 52px;  margin-top: 6px; text-indent: 2em;}
+a.newslist-link{float: right; color: #a2080e; margin-top: 4px;}
+.homelinks{display:block; overflow:hidden; width:100%}
+.homelinks>.right{color:#a2080e; padding:65px 10px 5px 0; _padding:65px 10px 5px 0;}
+
+
+/*公司荣誉、简介、理念*/
+.compnyinfo{height: 130px;padding:18px; background: url(../img/imger12.png) no-repeat;  background-position: -9px 0px; background-size: 1022px;}
+.compnyinfolink{display: block; float: left; width: 160px; height: 100px; }
+.jianjie{background: url(../img/company1.png) no-repeat;  }
+.rongyu{background: url(../img/company2.png) no-repeat; }
+.linian{background: url(../img/company3.png) no-repeat; }
+.jianjieed{background: url(../img/company11.png) no-repeat;  }
+.rongyued{background: url(../img/company22.png) no-repeat; }
+.linianed{background: url(../img/company33.png) no-repeat; }
+.webposition{height: 30px; line-height: 30px; font-size: 18px; font-family: positionfont; font-weight:bold; text-indent: 2em;}
+.detailcontent{width: 1000px; min-width: 300px; padding: 10px 0px;line-height:25px;}
+.detailcontent img{max-width: 100%;}
+
+/*公司产品*/
+.productimg{display:block; height: 70px; width: 240px; margin-left: 12px; margin-bottom: 10px;  background: url(../img/imger18.png) no-repeat; background-position: -10px -15px;}
+.productlist{margin-top: 20px;}
+.productall{line-height: 26px; margin-left: 12px; font-size: 16px; font-weight: bold; font-family: positionfont; padding-left: 24px; padding-top: 4px; background: url(../img/imger20.png) no-repeat; background-position: center left;}
+.productlinks{ margin-top: 10px; }
+.productlinks a{display: block; float: left; width: 14px; height: 100px; background: url(../img/imger19.png) no-repeat; padding: 30px 10px; margin-right: 16px;}
+.productlinks a:hover,.productlinks a.checked{color: #a2080e;}
+.goodslist{width: 684px;}
+.goodslist li{width: 155px; float: left; margin-right: 15px;}
+.goodslist li a{width: 100%; display: block; overflow: hidden; color: #666666; font-size: 14px;}
+.goodslist li a img{width: 155px; height: 155px; }
+.goodslist li a span{line-height: 30px; display:block; width:150px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+.productprice{color: #e93e3e; font-size: 18px; font-family: "微软雅黑";}
+.webpositionright{font-family: positionfont; font-size: 18px; margin-bottom: 6px;}
+
+
+
+/*产品详情*/
+.newcontent{width: 664px;}
+.newcontent-left{float: left; width: 620px;}
+.newcontent-right{float: right; width: 20px; font-size: 14px;}
+
+
+
+/*公司详情*/
+.artile_img{width: 1000px; height: 96px; background:url("../img/imger23.png") no-repeat; background-position: right bottom;}
+.artile_title{font-size: 24px;color: #9E3B04;font-weight: bold;text-align: center;margin-top:10px;}
+.artile_time{color: dimgrey;text-align: center;font-size: 16px; margin-top:16px;}
+
+
+/*新闻列表*/
+.commonlist li{border: 1px dotted #666666; width: 998px;}
+.commonlist li:hover{background: #FFF;}
+.commonlist .newslist-right{ width: 800px; margin: 5px;}
+.commonlist .newslist-img{ height: 108px;}
+.commonlist .newslist-title{width: 690px;}
+
+/*保健常识*/
+.healthyimg{background: url(../img/honor.png) no-repeat; background-size: auto 100%; height: 80px; width: 100%;}
+
+
+
+/*关于我们*/
+.positionimg{background: url(../img/imger8.png) no-repeat; background-position: left top; padding-top: 20px;}
+.contactimg{padding: 0px; margin: 26px 20px 20px; width: 124px;}
+.contactimg img{height: 130px; width:130px;}
+.contactbottom{background: url(../img/contactbottom.png) no-repeat; background-position:left bottom; margin-bottom: 20px;}
+
+
+
+
+
+/*最后添加的公共样式,用于个别样式*/
+.left{float: left;width: 500px;}
+.right{float: right;}
+.border{border: 1px solid #E0E0E0;}
+.borderleft{border-left: 1px solid #E0E0E0;}
+.borderright{border-right: 1px solid #E0E0E0;}
+.bordertop{border-top: 1px solid #E0E0E0;}
+.borderbottom{border-bottom: 1px solid #E0E0E0;}
+.noborder{border: 0;}
+.nomargin{margin: 0;}
+.nopadding{padding: 0;}
+.underline{text-decoration: underline;}
+.color{color: #C72125;}
+.bgcolor{background-color: #C72125;}
+
+
+/*登录*/
+.mask{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    position: fixed;
+    z-index: 10;
+    top:0;
+    left:0;
+}
+.mask-content{
+    width: 410px;
+    height: 340px;
+    margin: 200px auto;
+    position: relative;
+    background:#fff url(../img/loginbg.png) no-repeat -16px -9px;
+    background-size:115%;
+}
+.mask-content h4{
+    line-height: 30px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.mask-content h4 span{
+    display: inline-block;
+    width:10px;
+    height:30px;
+    background: #545454;
+    vertical-align: middle;
+}
+.mask-content input[type=text]{
+    display: block;
+    border:solid 1px #E8E6E6;
+    width:80%;
+    height:30px;
+    margin: 10px auto;
+    text-indent: 1rem;
+    outline: none;
+}
+.mask-content input[type=password]{
+    display: block;
+    border:solid 1px #E8E6E6;
+    width:80%;
+    height:30px;
+    margin: 10px auto;
+    text-indent: 1rem;outline: none;
+}
+.mask-content p{
+    width: 80%;
+    display: block;
+    margin: auto;
+    line-height: 30px;
+    font-size: 14px;
+}
+.mask-content p input[type=checkbox]{
+    vertical-align: middle;
+}
+.mask-content p a{
+    color:#DF5552;
+    text-decoration: none;
+}
+.mask-content input[type=button]{
+    width: 80%;
+    display: block;
+    height: 30px;
+    margin:10px auto;
+    color: #fff;
+    background: #DF5552;
+    border:none;
+    outline: none;
+}
+
+/*  注册*/
+.reg_all{
+    width: 400px;height: 400px;margin:0 auto;
+
+}
+.reg_alls{
+    width: 400px;height:40px;margin:0 auto;
+ font-family: "微软雅黑";
+    font-size: 22px;
+}
+.reg_all input[type=text]{
+    width: 250px;
+    height: 30px;
+    margin:20px auto;
+    border:none;
+    outline: none;
+    padding: 0 5px;
+}
+.reg_all input[type=password]{
+    width: 250px;
+    height: 30px;
+    margin:20px auto;
+    border:none;
+    outline: none;
+    padding: 0 5px;
+}
+.reg_all input[type=button]{
+    width: 260px;
+    height: 30px;
+   margin-top: 30px;
+    border:none;
+    outline: none;
+    background: #E59594;
+    margin-left: 58px;
+}
+
+#btnreg{color:#FFF;}
+
+
+

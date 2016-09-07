@@ -1,0 +1,183 @@
+html, body, div, span, form, button, text, input, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, address, big, cite, code, del, em, font, img, ins, small, strong, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, input, button {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, verdana, sans-serif, '宋体';
+}
+text, input, button {
+	border: 0;
+}
+ol, ul {
+	list-style: none;
+}
+s {
+	font-style: normal;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+i {
+	font-style: normal;
+}
+:focus {
+	outline: 0;
+}
+a {
+	color: #333;
+	text-decoration: none;
+}
+a img {
+	border: none;
+}
+img {
+	border: 0;
+	vertical-align: middle;
+}
+table {
+	empty-cells: show;
+}
+ins {
+	text-decoration: none;
+}
+em {
+	font-style: normal;
+}
+ button::-moz-focus-inner, input[type=reset]::-moz-focus-inner, input[type=button]::-moz-focus-inner, input[type=submit]::-moz-focus-inner, input[type=file] > input[type=button]::-moz-focus-inner {
+ border: 0;
+ padding: 0;
+}
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	zoom: 1;
+}
+.clear {
+	clear: both;
+}
+body {
+	background:#ffffff;
+	font-size:14px;
+}
+/* 头部*/
+
+.eus-header {
+	width:100%;
+	height:180px;
+	background:url(../images/top-bg.png) repeat-x;
+}
+.eus-header-bg {
+	width:1300px;
+	margin:0 auto;
+	height:180px;
+	background:url(../images/top-bg01.png) no-repeat;
+}
+.eus-header-main {
+	width:1000px;
+	margin:0 auto;
+	height:auto;
+}
+/* 导航*/
+.eus-header-nav {
+	float: left;
+	width: 1000px;
+	background: #4e6599;
+	height: 40px;
+	margin-top: 35px;
+	overflow: hidden;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+.eus-header-logo {
+	float: left;
+	margin-top: 25px;
+}
+.navitems li {
+	float: left;
+	position: relative;
+	width: 124px;
+	height: 40px;
+	text-align: center;
+	border-right: 1px solid #999;
+	overflow:hidden;
+}
+.navitems li:hover {
+	background:#1d3a7b;
+}
+.navitems .on {
+	background:#1d3a7b;
+}
+.navitems li a {
+	width: 124px;
+	text-align: center;
+	color: #fff;
+	line-height: 40px;
+	font-size: 14px;
+	display: block;
+	text-decoration: none;
+}
+/* 导航*/
+/* 头部*/
+
+/* 底部*/
+.footer {
+	text-align: center;
+	font-size: 14px;
+	font-family: "宋体";
+	line-height:25px;
+	background: #464646;
+	color: #fff;
+	/* background: none repeat scroll 0% 0% #F3F3F3; */
+padding: 20px 0px;
+}
+/* 底部*/
+
+
+/* 分页效果*/
+.custom-pager {
+	text-align: center;
+	font-size: 12px;
+	color: #fff;
+	width: 1000px;
+	margin-top: 20px;
+	/* height: 40px; */
+	float: left;
+}
+.custom-pager span {
+	position: relative;
+	padding: 0.3em 0.8em;
+	cursor: pointer;
+	margin-left: 5px;
+	background: #4E6599;
+}
+.custom-pager i {
+	position: relative;
+	padding: 0.3em 0.8em;
+	cursor: pointer;
+	margin-left: 5px;
+	border: 1px solid #4E6599;
+	color: #333;
+}
+.custom-pager a {
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #4E6599;
+    margin-left: 5px;
+    padding: 0.3em 0.8em;
+    position: relative;
+}
+
+/* 分页效果*/
+
+/* 详情翻页*/
+.linkdiv {
+    width: 953px; height:30px;
+    margin-left: 20px; margin-top:20px;
+    overflow: hidden;
+}
+.pagelink {
+    float: left;
+    display: block;
+    overflow: hidden; width:50%; white-space:nowrap; text-overflow:ellipsis; color:#4e6599;
+}

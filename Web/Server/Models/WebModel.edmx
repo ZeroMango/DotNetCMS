@@ -1,0 +1,698 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EHECD_HealthcareModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EHECD_HealthcareModelStoreContainer">
+          <EntitySet Name="Article" EntityType="EHECD_HealthcareModel.Store.Article" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ArticleCategory" EntityType="EHECD_HealthcareModel.Store.ArticleCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Download" EntityType="EHECD_HealthcareModel.Store.Download" store:Type="Tables" store:Schema="dbo" store:Name="Download">
+            <DefiningQuery>SELECT 
+      [Download].[ID] AS [ID], 
+      [Download].[s_SoftName] AS [s_SoftName], 
+      [Download].[s_SoftSize] AS [s_SoftSize], 
+      [Download].[s_SoftProvider] AS [s_SoftProvider], 
+      [Download].[s_SoftLang] AS [s_SoftLang], 
+      [Download].[s_SoftVersion] AS [s_SoftVersion], 
+      [Download].[s_AppEnvironment] AS [s_AppEnvironment], 
+      [Download].[s_UpdateTime] AS [s_UpdateTime], 
+      [Download].[s_SoftUrl] AS [s_SoftUrl], 
+      [Download].[s_SoftImgUrl] AS [s_SoftImgUrl], 
+      [Download].[s_SoftMemo] AS [s_SoftMemo], 
+      [Download].[s_SoftMemoNoHtml] AS [s_SoftMemoNoHtml], 
+      [Download].[i_UserID] AS [i_UserID], 
+      [Download].[i_Status] AS [i_Status], 
+      [Download].[s_AddTime] AS [s_AddTime]
+      FROM [dbo].[Download] AS [Download]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FriendlyLink" EntityType="EHECD_HealthcareModel.Store.FriendlyLink" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Message" EntityType="EHECD_HealthcareModel.Store.Message" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ModelItem" EntityType="EHECD_HealthcareModel.Store.ModelItem" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ModelItem_Value" EntityType="EHECD_HealthcareModel.Store.ModelItem_Value" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ModelTable" EntityType="EHECD_HealthcareModel.Store.ModelTable" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Order" EntityType="EHECD_HealthcareModel.Store.Order" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RegistAndLogin" EntityType="EHECD_HealthcareModel.Store.RegistAndLogin" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Template" EntityType="EHECD_HealthcareModel.Store.Template" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="EHECD_HealthcareModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WebConfig" EntityType="EHECD_HealthcareModel.Store.WebConfig" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="i_CategoryID" Type="int" Nullable="false" />
+          <Property Name="s_Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="s_Author" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_Summary" Type="nvarchar" MaxLength="1000" />
+          <Property Name="b_IsTop" Type="bit" Nullable="false" />
+          <Property Name="b_IsSlide" Type="bit" Nullable="false" />
+          <Property Name="b_IsHot" Type="bit" Nullable="false" />
+          <Property Name="s_ImgPath" Type="nvarchar" MaxLength="255" />
+          <Property Name="s_Content" Type="text" />
+          <Property Name="s_ContentNoHtml" Type="text" />
+          <Property Name="s_GenarateRule" Type="nvarchar" MaxLength="255" />
+          <Property Name="s_KeyWord" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="i_TemplateID" Type="int" Nullable="false" />
+          <Property Name="s_EnName" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_AddTime" Type="nvarchar" MaxLength="19" />
+          <Property Name="s_UpdateTime" Type="nvarchar" MaxLength="19" />
+          <Property Name="s_Attach" Type="nvarchar" MaxLength="255" />
+          <Property Name="s_Size" Type="nvarchar" MaxLength="20" />
+          <Property Name="s_Lang" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_Version" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_PublishTime" Type="nvarchar" MaxLength="19" />
+          <Property Name="i_UserID" Type="int" Nullable="false" />
+          <Property Name="i_Status" Type="int" Nullable="false" />
+          <Property Name="i_ViewCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArticleCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="i_PID" Type="int" Nullable="false" />
+          <Property Name="s_Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="s_EnName" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_ImgPath" Type="nvarchar" MaxLength="255" />
+          <Property Name="b_IsRedirect" Type="bit" Nullable="false" />
+          <Property Name="s_RedirectUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="b_IsShowNav" Type="bit" Nullable="false" />
+          <Property Name="i_TemplateID" Type="int" Nullable="false" />
+          <Property Name="b_IsContentItem" Type="bit" Nullable="false" />
+          <Property Name="i_ContentTemplateID" Type="int" Nullable="false" />
+          <Property Name="s_Content" Type="text" />
+          <Property Name="s_ContentNoHtml" Type="text" />
+          <Property Name="s_GenarateRule" Type="nvarchar" MaxLength="255" />
+          <Property Name="s_ListGenarateRule" Type="nvarchar" MaxLength="255" />
+          <Property Name="s_KeyWord" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="i_UserID" Type="int" Nullable="false" />
+          <Property Name="i_Order" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“EHECD_Healthcare.dbo.Download”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="Download">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="i_UserID" />
+            <PropertyRef Name="i_Status" />
+            <PropertyRef Name="s_AddTime" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="s_SoftName" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_SoftSize" Type="nvarchar" MaxLength="20" />
+          <Property Name="s_SoftProvider" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_SoftLang" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_SoftVersion" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_AppEnvironment" Type="nvarchar" MaxLength="255" />
+          <Property Name="s_UpdateTime" Type="nvarchar" MaxLength="19" />
+          <Property Name="s_SoftUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="s_SoftImgUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="s_SoftMemo" Type="nvarchar(max)" />
+          <Property Name="s_SoftMemoNoHtml" Type="nvarchar(max)" />
+          <Property Name="i_UserID" Type="int" Nullable="false" />
+          <Property Name="i_Status" Type="int" Nullable="false" />
+          <Property Name="s_AddTime" Type="nvarchar" Nullable="false" MaxLength="19" />
+        </EntityType>
+        <EntityType Name="FriendlyLink">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="s_LinkName" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_LinkUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="s_LinkDesciption" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="s_QQ" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="s_Name" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="s_TelNum" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="s_Remark" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModelItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="i_TableID" Type="int" Nullable="false" />
+          <Property Name="s_ItemTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_ItemName" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_Itemtype" Type="nvarchar" MaxLength="15" />
+          <Property Name="b_IsRequired" Type="bit" Nullable="false" />
+          <Property Name="i_MinCount" Type="int" Nullable="false" />
+          <Property Name="i_MaxCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModelItem_Value">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="i_TableID" Type="int" Nullable="false" />
+          <Property Name="s_Content" Type="nvarchar(max)" />
+          <Property Name="s_ContentNoHtml" Type="nvarchar(max)" />
+          <Property Name="i_Order" Type="int" Nullable="false" />
+          <Property Name="s_AddTime" Type="nvarchar" MaxLength="19" />
+        </EntityType>
+        <EntityType Name="ModelTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="s_ModelName" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_ModelIdentity" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_ModelMemo" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="s_UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="s_RealName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="s_Goods" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="s_Phone" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="i_Count" Type="int" Nullable="false" />
+          <Property Name="s_Address" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="s_OrderTime" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="s_Message" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="RegistAndLogin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="s_UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="s_UserPassword" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="s_VIPCode" Type="nchar" MaxLength="20" />
+          <Property Name="sAdderss" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="s_TemplateName" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_TemplateContent" Type="text" />
+          <Property Name="s_TemplatePath" Type="nvarchar" MaxLength="255" />
+          <Property Name="s_TemplateType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="s_UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="s_Password" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="i_UserType" Type="tinyint" Nullable="false" />
+          <Property Name="s_RealName" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_Mail" Type="nvarchar" MaxLength="255" />
+          <Property Name="i_Status" Type="tinyint" Nullable="false" />
+          <Property Name="s_Url" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_Token" Type="nvarchar" MaxLength="255" />
+          <Property Name="s_AppId" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_AppSecret" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_WeixinAccount" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_WeixinID" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WebConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="s_SiteName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="s_SiteDNS" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_CopyRight" Type="nvarchar" MaxLength="500" />
+          <Property Name="s_Filing" Type="nvarchar" MaxLength="500" />
+          <Property Name="s_KeyWord" Type="nvarchar" MaxLength="500" />
+          <Property Name="s_Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="s_Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="i_PageSize" Type="int" Nullable="false" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EHECD_HealthcareModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EHECD_WebEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articles" EntityType="EHECD_HealthcareModel.Article" />
+          <EntitySet Name="ArticleCategories" EntityType="EHECD_HealthcareModel.ArticleCategory" />
+          <EntitySet Name="Downloads" EntityType="EHECD_HealthcareModel.Download" />
+          <EntitySet Name="FriendlyLinks" EntityType="EHECD_HealthcareModel.FriendlyLink" />
+          <EntitySet Name="Messages" EntityType="EHECD_HealthcareModel.Message" />
+          <EntitySet Name="ModelItems" EntityType="EHECD_HealthcareModel.ModelItem" />
+          <EntitySet Name="ModelItem_Value" EntityType="EHECD_HealthcareModel.ModelItem_Value" />
+          <EntitySet Name="ModelTables" EntityType="EHECD_HealthcareModel.ModelTable" />
+          <EntitySet Name="Orders" EntityType="EHECD_HealthcareModel.Order" />
+          <EntitySet Name="RegistAndLogins" EntityType="EHECD_HealthcareModel.RegistAndLogin" />
+          <EntitySet Name="Templates" EntityType="EHECD_HealthcareModel.Template" />
+          <EntitySet Name="Users" EntityType="EHECD_HealthcareModel.User" />
+          <EntitySet Name="WebConfigs" EntityType="EHECD_HealthcareModel.WebConfig" />
+        </EntityContainer>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="i_CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="s_Title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Author" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Summary" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="b_IsTop" Type="Boolean" Nullable="false" />
+          <Property Name="b_IsSlide" Type="Boolean" Nullable="false" />
+          <Property Name="b_IsHot" Type="Boolean" Nullable="false" />
+          <Property Name="s_ImgPath" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="s_Content" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="s_ContentNoHtml" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="s_GenarateRule" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="s_KeyWord" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Description" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="i_TemplateID" Type="Int32" Nullable="false" />
+          <Property Name="s_EnName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_AddTime" Type="String" MaxLength="19" Unicode="true" FixedLength="false" />
+          <Property Name="s_UpdateTime" Type="String" MaxLength="19" Unicode="true" FixedLength="false" />
+          <Property Name="s_Attach" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="s_Size" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="s_Lang" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Version" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_PublishTime" Type="String" MaxLength="19" Unicode="true" FixedLength="false" />
+          <Property Name="i_UserID" Type="Int32" Nullable="false" />
+          <Property Name="i_Status" Type="Int32" Nullable="false" />
+          <Property Name="i_ViewCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArticleCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="i_PID" Type="Int32" Nullable="false" />
+          <Property Name="s_Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_EnName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_ImgPath" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="b_IsRedirect" Type="Boolean" Nullable="false" />
+          <Property Name="s_RedirectUrl" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="b_IsShowNav" Type="Boolean" Nullable="false" />
+          <Property Name="i_TemplateID" Type="Int32" Nullable="false" />
+          <Property Name="b_IsContentItem" Type="Boolean" Nullable="false" />
+          <Property Name="i_ContentTemplateID" Type="Int32" Nullable="false" />
+          <Property Name="s_Content" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="s_ContentNoHtml" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="s_GenarateRule" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="s_ListGenarateRule" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="s_KeyWord" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Description" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="i_UserID" Type="Int32" Nullable="false" />
+          <Property Name="i_Order" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Download">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="i_UserID" />
+            <PropertyRef Name="i_Status" />
+            <PropertyRef Name="s_AddTime" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="s_SoftName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_SoftSize" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="s_SoftProvider" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_SoftLang" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_SoftVersion" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_AppEnvironment" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="s_UpdateTime" Type="String" MaxLength="19" Unicode="true" FixedLength="false" />
+          <Property Name="s_SoftUrl" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="s_SoftImgUrl" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="s_SoftMemo" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="s_SoftMemoNoHtml" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="i_UserID" Type="Int32" Nullable="false" />
+          <Property Name="i_Status" Type="Int32" Nullable="false" />
+          <Property Name="s_AddTime" Type="String" Nullable="false" MaxLength="19" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="FriendlyLink">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="s_LinkName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_LinkUrl" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="s_LinkDesciption" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="s_QQ" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="s_Name" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="s_TelNum" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="s_Remark" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ModelItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="i_TableID" Type="Int32" Nullable="false" />
+          <Property Name="s_ItemTitle" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_ItemName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Itemtype" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="b_IsRequired" Type="Boolean" Nullable="false" />
+          <Property Name="i_MinCount" Type="Int32" Nullable="false" />
+          <Property Name="i_MaxCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModelItem_Value">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="i_TableID" Type="Int32" Nullable="false" />
+          <Property Name="s_Content" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="s_ContentNoHtml" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="i_Order" Type="Int32" Nullable="false" />
+          <Property Name="s_AddTime" Type="String" MaxLength="19" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ModelTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="s_ModelName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_ModelIdentity" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_ModelMemo" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="s_UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_RealName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Goods" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Phone" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="i_Count" Type="Int32" Nullable="false" />
+          <Property Name="s_Address" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="s_OrderTime" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Message" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="RegistAndLogin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="s_UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_UserPassword" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="s_VIPCode" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="sAdderss" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="s_TemplateName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_TemplateContent" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="s_TemplatePath" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="s_TemplateType" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="s_UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Password" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="i_UserType" Type="Byte" Nullable="false" />
+          <Property Name="s_RealName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Mail" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="i_Status" Type="Byte" Nullable="false" />
+          <Property Name="s_Url" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Token" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="s_AppId" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_AppSecret" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_WeixinAccount" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_WeixinID" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="WebConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="s_SiteName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_SiteDNS" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_CopyRight" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="s_Filing" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="s_KeyWord" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="s_Description" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="s_Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_Address" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="i_PageSize" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EHECD_HealthcareModelStoreContainer" CdmEntityContainer="EHECD_WebEntities">
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.Article">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="i_CategoryID" ColumnName="i_CategoryID" />
+                <ScalarProperty Name="s_Title" ColumnName="s_Title" />
+                <ScalarProperty Name="s_Author" ColumnName="s_Author" />
+                <ScalarProperty Name="s_Summary" ColumnName="s_Summary" />
+                <ScalarProperty Name="b_IsTop" ColumnName="b_IsTop" />
+                <ScalarProperty Name="b_IsSlide" ColumnName="b_IsSlide" />
+                <ScalarProperty Name="b_IsHot" ColumnName="b_IsHot" />
+                <ScalarProperty Name="s_ImgPath" ColumnName="s_ImgPath" />
+                <ScalarProperty Name="s_Content" ColumnName="s_Content" />
+                <ScalarProperty Name="s_ContentNoHtml" ColumnName="s_ContentNoHtml" />
+                <ScalarProperty Name="s_GenarateRule" ColumnName="s_GenarateRule" />
+                <ScalarProperty Name="s_KeyWord" ColumnName="s_KeyWord" />
+                <ScalarProperty Name="s_Description" ColumnName="s_Description" />
+                <ScalarProperty Name="i_TemplateID" ColumnName="i_TemplateID" />
+                <ScalarProperty Name="s_EnName" ColumnName="s_EnName" />
+                <ScalarProperty Name="s_AddTime" ColumnName="s_AddTime" />
+                <ScalarProperty Name="s_UpdateTime" ColumnName="s_UpdateTime" />
+                <ScalarProperty Name="s_Attach" ColumnName="s_Attach" />
+                <ScalarProperty Name="s_Size" ColumnName="s_Size" />
+                <ScalarProperty Name="s_Lang" ColumnName="s_Lang" />
+                <ScalarProperty Name="s_Version" ColumnName="s_Version" />
+                <ScalarProperty Name="s_PublishTime" ColumnName="s_PublishTime" />
+                <ScalarProperty Name="i_UserID" ColumnName="i_UserID" />
+                <ScalarProperty Name="i_Status" ColumnName="i_Status" />
+                <ScalarProperty Name="i_ViewCount" ColumnName="i_ViewCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleCategories">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.ArticleCategory">
+              <MappingFragment StoreEntitySet="ArticleCategory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="i_PID" ColumnName="i_PID" />
+                <ScalarProperty Name="s_Name" ColumnName="s_Name" />
+                <ScalarProperty Name="s_EnName" ColumnName="s_EnName" />
+                <ScalarProperty Name="s_ImgPath" ColumnName="s_ImgPath" />
+                <ScalarProperty Name="b_IsRedirect" ColumnName="b_IsRedirect" />
+                <ScalarProperty Name="s_RedirectUrl" ColumnName="s_RedirectUrl" />
+                <ScalarProperty Name="b_IsShowNav" ColumnName="b_IsShowNav" />
+                <ScalarProperty Name="i_TemplateID" ColumnName="i_TemplateID" />
+                <ScalarProperty Name="b_IsContentItem" ColumnName="b_IsContentItem" />
+                <ScalarProperty Name="i_ContentTemplateID" ColumnName="i_ContentTemplateID" />
+                <ScalarProperty Name="s_Content" ColumnName="s_Content" />
+                <ScalarProperty Name="s_ContentNoHtml" ColumnName="s_ContentNoHtml" />
+                <ScalarProperty Name="s_GenarateRule" ColumnName="s_GenarateRule" />
+                <ScalarProperty Name="s_ListGenarateRule" ColumnName="s_ListGenarateRule" />
+                <ScalarProperty Name="s_KeyWord" ColumnName="s_KeyWord" />
+                <ScalarProperty Name="s_Description" ColumnName="s_Description" />
+                <ScalarProperty Name="i_UserID" ColumnName="i_UserID" />
+                <ScalarProperty Name="i_Order" ColumnName="i_Order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Downloads">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.Download">
+              <MappingFragment StoreEntitySet="Download">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="s_SoftName" ColumnName="s_SoftName" />
+                <ScalarProperty Name="s_SoftSize" ColumnName="s_SoftSize" />
+                <ScalarProperty Name="s_SoftProvider" ColumnName="s_SoftProvider" />
+                <ScalarProperty Name="s_SoftLang" ColumnName="s_SoftLang" />
+                <ScalarProperty Name="s_SoftVersion" ColumnName="s_SoftVersion" />
+                <ScalarProperty Name="s_AppEnvironment" ColumnName="s_AppEnvironment" />
+                <ScalarProperty Name="s_UpdateTime" ColumnName="s_UpdateTime" />
+                <ScalarProperty Name="s_SoftUrl" ColumnName="s_SoftUrl" />
+                <ScalarProperty Name="s_SoftImgUrl" ColumnName="s_SoftImgUrl" />
+                <ScalarProperty Name="s_SoftMemo" ColumnName="s_SoftMemo" />
+                <ScalarProperty Name="s_SoftMemoNoHtml" ColumnName="s_SoftMemoNoHtml" />
+                <ScalarProperty Name="i_UserID" ColumnName="i_UserID" />
+                <ScalarProperty Name="i_Status" ColumnName="i_Status" />
+                <ScalarProperty Name="s_AddTime" ColumnName="s_AddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FriendlyLinks">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.FriendlyLink">
+              <MappingFragment StoreEntitySet="FriendlyLink">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="s_LinkName" ColumnName="s_LinkName" />
+                <ScalarProperty Name="s_LinkUrl" ColumnName="s_LinkUrl" />
+                <ScalarProperty Name="s_LinkDesciption" ColumnName="s_LinkDesciption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="s_QQ" ColumnName="s_QQ" />
+                <ScalarProperty Name="s_Name" ColumnName="s_Name" />
+                <ScalarProperty Name="s_TelNum" ColumnName="s_TelNum" />
+                <ScalarProperty Name="s_Remark" ColumnName="s_Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModelItems">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.ModelItem">
+              <MappingFragment StoreEntitySet="ModelItem">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="i_TableID" ColumnName="i_TableID" />
+                <ScalarProperty Name="s_ItemTitle" ColumnName="s_ItemTitle" />
+                <ScalarProperty Name="s_ItemName" ColumnName="s_ItemName" />
+                <ScalarProperty Name="s_Itemtype" ColumnName="s_Itemtype" />
+                <ScalarProperty Name="b_IsRequired" ColumnName="b_IsRequired" />
+                <ScalarProperty Name="i_MinCount" ColumnName="i_MinCount" />
+                <ScalarProperty Name="i_MaxCount" ColumnName="i_MaxCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModelItem_Value">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.ModelItem_Value">
+              <MappingFragment StoreEntitySet="ModelItem_Value">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="i_TableID" ColumnName="i_TableID" />
+                <ScalarProperty Name="s_Content" ColumnName="s_Content" />
+                <ScalarProperty Name="s_ContentNoHtml" ColumnName="s_ContentNoHtml" />
+                <ScalarProperty Name="i_Order" ColumnName="i_Order" />
+                <ScalarProperty Name="s_AddTime" ColumnName="s_AddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModelTables">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.ModelTable">
+              <MappingFragment StoreEntitySet="ModelTable">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="s_ModelName" ColumnName="s_ModelName" />
+                <ScalarProperty Name="s_ModelIdentity" ColumnName="s_ModelIdentity" />
+                <ScalarProperty Name="s_ModelMemo" ColumnName="s_ModelMemo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="s_UserName" ColumnName="s_UserName" />
+                <ScalarProperty Name="s_RealName" ColumnName="s_RealName" />
+                <ScalarProperty Name="s_Goods" ColumnName="s_Goods" />
+                <ScalarProperty Name="s_Phone" ColumnName="s_Phone" />
+                <ScalarProperty Name="i_Count" ColumnName="i_Count" />
+                <ScalarProperty Name="s_Address" ColumnName="s_Address" />
+                <ScalarProperty Name="s_OrderTime" ColumnName="s_OrderTime" />
+                <ScalarProperty Name="s_Message" ColumnName="s_Message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistAndLogins">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.RegistAndLogin">
+              <MappingFragment StoreEntitySet="RegistAndLogin">
+                <ScalarProperty Name="sAdderss" ColumnName="sAdderss" />
+                <ScalarProperty Name="s_VIPCode" ColumnName="s_VIPCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="s_UserName" ColumnName="s_UserName" />
+                <ScalarProperty Name="s_UserPassword" ColumnName="s_UserPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Templates">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.Template">
+              <MappingFragment StoreEntitySet="Template">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="s_TemplateName" ColumnName="s_TemplateName" />
+                <ScalarProperty Name="s_TemplateContent" ColumnName="s_TemplateContent" />
+                <ScalarProperty Name="s_TemplatePath" ColumnName="s_TemplatePath" />
+                <ScalarProperty Name="s_TemplateType" ColumnName="s_TemplateType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="s_UserName" ColumnName="s_UserName" />
+                <ScalarProperty Name="s_Password" ColumnName="s_Password" />
+                <ScalarProperty Name="i_UserType" ColumnName="i_UserType" />
+                <ScalarProperty Name="s_RealName" ColumnName="s_RealName" />
+                <ScalarProperty Name="s_Phone" ColumnName="s_Phone" />
+                <ScalarProperty Name="s_Mail" ColumnName="s_Mail" />
+                <ScalarProperty Name="i_Status" ColumnName="i_Status" />
+                <ScalarProperty Name="s_Url" ColumnName="s_Url" />
+                <ScalarProperty Name="s_Token" ColumnName="s_Token" />
+                <ScalarProperty Name="s_AppId" ColumnName="s_AppId" />
+                <ScalarProperty Name="s_AppSecret" ColumnName="s_AppSecret" />
+                <ScalarProperty Name="s_WeixinAccount" ColumnName="s_WeixinAccount" />
+                <ScalarProperty Name="s_WeixinID" ColumnName="s_WeixinID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebConfigs">
+            <EntityTypeMapping TypeName="EHECD_HealthcareModel.WebConfig">
+              <MappingFragment StoreEntitySet="WebConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="s_SiteName" ColumnName="s_SiteName" />
+                <ScalarProperty Name="s_SiteDNS" ColumnName="s_SiteDNS" />
+                <ScalarProperty Name="s_CopyRight" ColumnName="s_CopyRight" />
+                <ScalarProperty Name="s_Filing" ColumnName="s_Filing" />
+                <ScalarProperty Name="s_KeyWord" ColumnName="s_KeyWord" />
+                <ScalarProperty Name="s_Description" ColumnName="s_Description" />
+                <ScalarProperty Name="s_Email" ColumnName="s_Email" />
+                <ScalarProperty Name="s_Phone" ColumnName="s_Phone" />
+                <ScalarProperty Name="s_Address" ColumnName="s_Address" />
+                <ScalarProperty Name="i_PageSize" ColumnName="i_PageSize" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

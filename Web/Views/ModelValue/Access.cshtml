@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Web.Server.Models.ModelItem>
+
+@{
+    ViewBag.Title = "Access";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form id="modelItemForm_@ViewData["iTableID"]" method="post">
+    <table>
+        @foreach (var item in Model)
+        {
+            if (item.s_Itemtype == "单行文本框")
+            {
+                if (item.s_ItemTitle.ToString() != "金卡号")
+                {
+            <tr>
+                <td>@item.s_ItemTitle:</td>
+                <td>
+                    <input class="easyui-validatebox" type="text" name="@item.s_ItemName" data-options="required:@item.b_IsRequired.ToString().ToLower(),validType:'length[@item.i_MinCount,@item.i_MaxCount]'"
+                                missingmessage="请输入[@item.s_ItemTitle]." style="width: 200px;" invalidmessage="@Html.DisplayFor(modelItem => item.s_ItemTitle)长度应小于[@item.i_MaxCount]." /></td>
+            </tr>}
+            }
+            else
+            {
+            <tr>
+
+                <td>@item.s_ItemTitle:</td>
+                <td>
+                    <textarea class="easyui-validatebox" name="@item.s_ItemName" data-options="required:@item.b_IsRequired.ToString().ToLower(),validType:'length[@item.i_MinCount,@item.i_MaxCount]'"
+                                missingmessage="请输入[@item.s_ItemTitle]." style="width: 300px;height: 50px;" invalidmessage="@Html.DisplayFor(modelItem => item.s_ItemTitle)长度应小于[@item.i_MaxCount]."></textarea></td>
+            </tr>
+            }
+        }
+    </table>
+</form>
+<script type="text/javascript">
+    /*
+    提交表单
+    */
+    function saveModelItem(url) {
+        $('#modelItemForm_@ViewData["iTableID"]').form('submit', {
+            url: url,
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                if (result == "yes") {
+                    window.parent.refresh_@ViewData["iTableID"]ModelValueList();
+                }
+                else {
+                    window.parent.message_@ViewData["iTableID"]Alert(result);
+                }
+            }
+        });
+    }
+
+    //加载所要修改的内容信息
+    function getModelValueInfo(id) {
+        $('#modelItemForm_@ViewData["iTableID"]').form('load', "@Url.Content("~/ModelValue/Edit/")" + id+ "?" + new Date().getTime());
+    }
+
+    //清空表单
+    function clearForm() {
+        $("#modelItemForm_@ViewData["iTableID"] input,textarea").each(function () {
+            $(this).val("");//清空之前填写的内容
+        });
+    }
+</script>

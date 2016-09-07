@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <input class="easyui-searchbox" data-options="prompt:'请输入关键字...',menu:'#searchTemplateMenu',searcher:doTemplateSearch" maxlength="20" style="width: 260px" />
+    <div id="searchTemplateMenu" style="width: 100px">
+        <div data-options="name:'s_TemplateName'">模板名称：</div>
+    </div>
+    <div style="margin-top: 15px;">
+        <div id="templateToolbar">
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true" onclick="addTemplate()">新增</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true" onclick="editTemplate()">编辑</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" plain="true" onclick="deleteTemplate()">删除</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-redo'" plain="true" onclick="generateTemplate()">生成当前选中模板</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-redo'" plain="true" onclick="generateTemplateAll()">生成全部模板</a>
+        </div>
+        <table id="templateList"></table>
+    </div>
+
+    <div id="templateMenuAction-buttons">
+        <a href="javascript:void(0)" id="btnTemplateMenuSave" class="easyui-linkbutton" iconcls="icon-ok" plain="true">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" plain="true" onclick="clearTemplateForm()">清除</a>
+    </div>
+    <div id="templatePanel" class="easyui-dialog" title="模板信息设置" style="width: 800px; height: 550px; padding: 10px;" closed="true"
+        buttons="#templateMenuAction-buttons" data-options="iconCls:'icon-save',resizable:false,modal:true">
+        <form id="templateForm" method="post">
+            <table>
+                <tr>
+                    <td>模板名:</td>
+                    <td>
+                        <input class="easyui-validatebox" type="text" name="s_TemplateName" data-options="required:true,validType:'length[1,20]'"
+                            missingmessage="请输入模板名." style="width: 300px;" invalidmessage="模板名长度应小于20." /></td>
+                </tr>
+                <tr>
+                    <td>模板文件名:</td>
+                    <td>
+                        <input class="easyui-validatebox" type="text" name="s_TemplatePath" data-options="required:true,validType:'filename'"
+                            missingmessage="请输入模板文件名." style="width: 300px;" invalidmessage="模板文件名格式不正确." />.html</td>
+                </tr>
+                <tr>
+                    <td>模板类型:</td>
+                    <td>
+                        <select class="easyui-combobox" name="s_TemplateType" data-options="required:true" missingmessage="请选择模板类型.">
+                            <option value="内容模板">内容模板</option>
+                            <option value="引用文件">引用文件</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>模板内容:</td>
+                    <td>
+                        <textarea class="easyui-validatebox" name="s_TemplateContent"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function doTemplateSearch(value, name) {
+        $('#templateList').datagrid('load', {
+            sField: name,
+            sKeyValue: value
+        });
+    }
+
+    function clearTemplateForm() {
+        $("#templateForm input,textarea").each(function () {
+            if ($(this).attr("name") != "s_TemplateType" && $(this).attr("name") != undefined) {
+                $(this).val("");//清空之前填写的内容
+            }
+        });
+    }
+    function addTemplate() {
+        $("#templatePanel").dialog("open");
+        clearTemplateForm();
+        $("#btnTemplateMenuSave").attr("href", "javascript:saveTemplate('@Url.Content("~/Template/Add")')");
+    }
+
+    function editTemplate() {
+        var row = $('#templateList').datagrid('getSelected');
+        if (row) {
+            $("#templatePanel").dialog("open");
+            $('#templateForm').form('load', '@Url.Content("~/Template/Edit/")' + row.ID);
+            $("#btnTemplateMenuSave").attr("href", "javascript:saveTemplate('@Url.Content("~/Template/Edit/")" + row.ID + "')");
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要编辑的模板.");
+        }
+    }
+
+    function generateTemplateAll() {
+        $.messager.confirm('提示', '确定要生成所有模板吗？', function (r) {
+            if (r) {
+                $.messager.progress();
+                $.post("@Url.Content("~/Template/GenerateTeamplateAll")", " ", function (message) {
+                    if (message == "true") {
+                        $.messager.progress('close');
+                        $.messager.alert("消息", "生成成功！");
+                    } else {
+                        $.messager.alert("消息", "生成失败！");
+                        $.messager.progress('close');
+                    }
+                })
+            }
+        })
+    }
+
+    function generateTemplate() {
+        var row = $('#templateList').datagrid('getSelected');
+        if(row){
+            $.messager.confirm('提示', '确定要生成当前选中模板吗？', function (r) {
+                if(r){
+                    $.post("@Url.Content("~/Template/GenerateTeamplateSingle/")" + row.ID," ",function(message){
+                        if (message == "true") {
+                            $.messager.alert("消息", "生成成功！");
+                        } else {
+                            $.messager.alert("消息","生成失败！");
+                        }
+                })
+                }
+
+
+            })
+        }
+    }
+
+    function deleteTemplate() {
+        var row = $('#templateList').datagrid('getSelected');
+        if (row) {
+            $.messager.confirm('提示', '确定删除该模板吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "@Url.Content("~/Template/Delete/")" + row.ID,
+                        success: function (result) {
+                            if (result == "yes") {
+                                $('#templateList').datagrid('reload');
+                            }
+                            else {
+                                $.messager.alert('提醒', result);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要删除的模板.");
+        }
+    }
+    $(function () {
+        $('#templateList').datagrid({
+            url: '@Url.Content("~/Template/JsonList")',
+            border: false,
+            pagination: true,
+            toolbar: "#templateToolbar",
+            singleSelect: true,
+            loadMsg: "正在加载...",
+            columns: [[
+                { field: 's_TemplateName', title: '模板名称', width: 120, sortable: true },
+                { field: 's_TemplateType', title: '模板类型', width: 100, sortable: true },
+                { field: 's_TemplatePath', title: '模板存放路径', width: 300 }
+            ]]
+        });
+    });
+
+    /*
+    提交表单
+    */
+    function saveTemplate(url) {
+        $('#btnTemplateMenuSave').linkbutton('disable');
+        $('#templateForm').form('submit', {
+            url: url,
+            onSubmit: function () {
+                $('#btnTemplateMenuSave').linkbutton('enable');
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                if (result == "yes") {
+                    $("#templatePanel").dialog("close");
+                    $("#templateList").datagrid("reload");
+                }
+                else {
+                    $.messager.alert('提醒', result);
+                }
+                $('#btnTemplateMenuSave').linkbutton('enable');
+            }
+        });
+    }
+</script>
+

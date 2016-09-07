@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <input class="easyui-searchbox" data-options="prompt:'请输入关键字...',menu:'#searchUserMenu',searcher:doUserSearch" maxlength="20" style="width: 260px" />
+    <div id="searchUserMenu" style="width: 80px">
+        <div data-options="name:'sUserName'">账号：</div>
+        <div data-options="name:'sRealName'">姓名：</div>
+    </div>
+    <div style="margin-top: 15px;">
+        <div id="userToolbar">
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true" onclick="addUser()">新增</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true" onclick="editUser()">编辑</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" plain="true" onclick="deleteUser()">删除</a>
+        </div>
+        <table id="userList"></table>
+    </div>
+
+    <div id="action-buttons">
+        <a href="javascript:void(0)" id="btnUserSave" class="easyui-linkbutton" iconcls="icon-ok" plain="true">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" plain="true" onclick="clearUserForm()">清除</a>
+    </div>
+    <div id="userPanel" class="easyui-dialog" title="用户信息设置" style="width: 400px; padding: 10px;" closed="true"
+        buttons="#action-buttons" data-options="iconCls:'icon-save',resizable:false,modal:true">
+        <form id="addUser" method="post">
+            <table>
+                <tr>
+                    <td>用户名:</td>
+                    <td>
+                        <input class="easyui-validatebox" type="text" name="s_UserName" data-options="required:true,validType:'length[3,20]'"
+                            missingmessage="请输入用户名" invalidmessage="用户名长度介于3-10之间" /></td>
+                </tr>
+                <tr>
+                    <td>密码:</td>
+                    <td>
+                        <input class="easyui-validatebox" type="password" name="s_Password" data-options="required:true,validType:'length[6,255]'"
+                            missingmessage="请输入密码" invalidmessage="密码长度应大于6位" /></td>
+                </tr>
+                <tr>
+                    <td>真实姓名:</td>
+                    <td>
+                        <input class="easyui-validatebox" type="text" name="s_RealName" data-options="required:true,validType:'length[2,10]'"
+                            missingmessage="请输入真实姓名" invalidmessage="真实姓名格式不正确" /></td>
+                </tr>
+                <tr>
+                    <td>联系电话:</td>
+                    <td>
+                        <input class="easyui-validatebox" maxlength="23" type="text" name="s_Phone" data-options="validType:'number'" invalidmessage="联系电话格式不正确" /></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>
+                        <input class="easyui-validatebox" type="text" name="s_Mail" data-options="validType:'email'" invalidmessage="Email格式不正确" /></td>
+                </tr>
+                <tr>
+                    <td>用户类型:</td>
+                    <td>
+                        <select class="easyui-combobox" name="i_UserType" data-options="required:true,editable:false" missingmessage="请选择用户类型">
+                            <option value="1">普通用户</option>
+                            <option value="2">管理员</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function doUserSearch(value, name) {
+        $('#userList').datagrid('load', {
+            sField: name,
+            sKeyValue: value
+        });
+    }
+    function addUser() {
+        $("#userPanel").dialog("open");
+        clearUserForm();
+        $("#btnUserSave").attr("href", "javascript:saveUser('@Url.Content("~/User/AddUser")')");
+    }
+    function clearUserForm() {
+        $("#addUser input").each(function () {
+            if ($(this).attr("name") != "i_UserType" && $(this).attr("name") != undefined) {
+                $(this).val("");//清空之前填写的内容
+            }
+        });
+    }
+    function editUser() {
+        var row = $('#userList').datagrid('getSelected');
+        if (row) {
+            $("#userPanel").dialog("open");
+            $('#addUser').form('load', '@Url.Content("~/User/Edit/")' + row.ID);
+            $("#btnUserSave").attr("href", "javascript:saveUser('@Url.Content("~/User/Edit/")" + row.ID + "')");
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要编辑的用户.");
+        }
+    }
+
+    function deleteUser() {
+        var row = $('#userList').datagrid('getSelected');
+        if (row) {
+            $.messager.confirm('提示', '确定删除该用户吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "@Url.Content("~/User/Delete/")" + row.ID,
+                        success: function (result) {
+                            if (result == "yes") {
+                                $('#userList').datagrid('reload');
+                            }
+                            else {
+                                $.messager.alert('提醒', result);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要删除的用户.");
+        }
+    }
+    $(function () {
+        $('#userList').datagrid({
+            url: '@Url.Content("~/User/JsonList")',
+            border: false,
+            pagination: true,
+            toolbar: "#userToolbar",
+            singleSelect: true,
+            columns: [[
+                { field: 's_UserName', title: '账号', width: 100, sortable: true },
+                { field: 's_RealName', title: '真实姓名', width: 100 },
+                { field: 's_Phone', title: '联系电话', width: 100 },
+                { field: 's_Mail', title: '电子邮件', width: 100 },
+                {
+                    field: 'i_Status', title: '状态', width: 100, sortable: true, formatter: function (value, row, index) {
+                        if (value == "0") {
+                            return "正常";
+                        } else {
+                            return "锁定";
+                        }
+                    }
+                }
+            ]]
+        });
+    });
+
+    function saveUser(url) {
+        $('#addUser').form('submit', {
+            url: url,
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                if (result == "yes") {
+                    $("#userPanel").dialog("close");
+                    $("#userList").datagrid("reload");
+                }
+                else {
+                    $.messager.alert('提醒', result);
+                }
+            }
+        });
+    }
+</script>

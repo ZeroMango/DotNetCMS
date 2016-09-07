@@ -1,0 +1,77 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+.news {
+width: 953px;
+/* float: right; */
+margin: 0 auto; margin-left:15px;
+border: 1px solid #c3c3c3; overflow:hidden; border-top:0px;
+}
+.contact-left {
+	float: left;
+	width: 249px;
+	height: auto;
+	padding: 35px;
+}
+.wt_title {
+	height: auto;
+}
+.wt_title h1 {
+	font-size: 14px;
+	line-height: 28px;
+	color:#333;
+}
+.wt_mate li span {
+	font-size: 14px;
+	color: #333;
+	line-height: 32px;
+}
+.wt_mate li .t {
+	display: inline-block;
+}
+.qr-img {
+	margin-top: 20px;
+	width: 192px;
+	overflow: hidden;
+	text-align: center;
+}
+.qr-img img {
+	width: 190px;
+	height:190px;
+	overflow: hidden;
+	border: 1px solid #d7d7d7;
+}
+.qr-img span {
+	display: inherit;
+	line-height: 20px;
+	color: #333;
+	font-size: 14px;
+	margin-top: 20px;
+	display:inline-block;
+}
+.contact-right {
+width: 540px;
+padding: 45px;
+float: right;
+border-left: 1px solid #d7d7d7;
+}
+.contact-map {
+width: 540px;
+height: 400px;
+float: right;
+border: 1px solid #d7d7d7;
+}
+.contact-map img {
+width: 540px;
+height: 400px;
+overflow: hidden;
+}
+/* ��������*/ 
+.content-scrol {
+	margin-top: 20px;
+	width: 1000px;
+	height: 63px;
+	margin: 0 auto;
+	background: url(../images/scroll_19.jpg) repeat-x;
+}
+/* footer*/

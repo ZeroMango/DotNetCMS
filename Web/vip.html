@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+
+
+    <script type="text/javascript" name="baidu-tc-cerfication" data-appid="6904123" src="http://apps.bdimg.com/cloudaapi/lightapp.js"></script>
+
+
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="四川华美德贸易有限公司" />
+    <meta name="description" content="" />
+    <meta name="baidu-site-verification" content="3RbhGIWvli" />
+    <title>网站首页 - 四川华美德贸易有限公司</title>
+    <link href="/HtmlStlye/css/public.css" rel="stylesheet" type="text/css">
+<link href="/HtmlStlye/css/middle.css" rel="stylesheet" type="text/css">
+<link href="/HtmlStlye/img/logo.png" rel="shortcut icon">
+<script src="/HtmlStlye/js/jQuery-1.8.3.js"></script>
+<script src="/HtmlStlye/js/function.js"></script>
+<script src="/HtmlStlye/js/scrol.js"></script>    <link href="/HtmlStlye/css/banner.css"  rel="stylesheet" type="text/css">
+    </head>
+	<body>
+<div class="header">
+			<div class="public">
+ <div class="header-left">
+				<span>
+        Hi,欢迎来到四川省华美德贸易有限公司官网！<a onclick="OpenLogin()" class="btn">  请登录</a>  <a href="/index/reg.html" class="btn"style="color:#a2080e">  免费注册</a><span id ="userN" name ="show" class="showName1 ">用户你好</span><input name="show" id ="zhuxiao" class="showName" type="button" value="注销登录" /></span>
+				<span class="right">联系电话：028-85730971 </span>
+</div>
+			</div>
+		</div>
+		<div class="nav">
+			<a href="/" class="nav-home"><img src="/HtmlStlye/img/logo.png"></a>
+			<div class="nav-list">
+            	        <a target="_self" title="网站首页" href="/">网站首页</a>
+	    	        <a target="_self" title="公司荣誉" href="/companyHonors.html">公司荣誉</a>
+	    	        <a target="_self" title="新闻中心" href="/news.html">新闻中心</a>
+	    	        <a target="_self" title="公司产品" href="/products/healthCare.html">公司产品</a>
+                    <a target="_self" title="访客留言" href="/contact.html">访客留言</a>
+                    <a target="_self" title="VIP服务区" href="/contact.html">VIP服务区</a>
+	    	        <a target="_self" title="保健常识" href="/healthy.html">保健常识</a>
+	    	        <a target="_self" title="联系我们" href="/contact.html">联系我们</a>
+	    			</div>
+		</div>
+<div class="mask" style="display:none">
+    <div class="mask-content">
+        <h4>
+            <span></span>
+            登录华美德保健官网
+            <a onclick="CloseLogin()" class="right" style="padding:0px 10px">× </a>
+        </h4>
+        <form class="loginFrom">
+            <input type="text" placeholder="账号" name="UserName" id="UserName1">
+            <input type="password" name="UserPassword" placeholder="密码" id="UserPassword1">
+            <p>
+                <input type="checkbox" id="loginbar">
+<label for=loginbar>自动登录</label>
+                <a href="javascript:void(0)" style="float:right">忘记密码?</a>
+            </p>
+            <input type="button" id="btnlogin" value="登 录">
+        </form>
+        <p>
+            没有账号？
+            <a href="/index/reg.html">立即注册</a>
+        </p>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $("#btnlogin").click(function () {
+            if ($("#UserName1").text() != "") {
+                return;
+            }
+            var params = $(".loginFrom").serialize();
+            var date = new Date();
+            var mydate = date.getFullYear() + date.getMonth() + date.getDate() + date.getHours() + date.getMinutes() + date.getSeconds();
+            jQuery.post("/Modelvalue/Add?iTableID=49", params + "&addtime=" + mydate + "&type=messageBox2", function (data) {
+                if (data == "yes") {
+                    var userName = document.getElementById("UserName1").value;
+                    var s = sessionStorage.setItem("0", userName);
+                    window.location.href = "/index.html";
+                }
+
+                else {
+                    alert("用户名或密码错误");
+                    $("#btnre").click();
+
+                }
+
+            })
+
+        })
+    })
+
+</script><script>
+             $(".nav-list a").each(function () {
+                 var thisUrl = $(this).attr("href");
+                 if (thisUrl != "/" && window.location.href.indexOf(thisUrl) > -1) {
+                     $(this).addClass("checked");
+                 }
+             });
+
+             function OpenLogin() {
+                 $(".mask").show();
+                 $("body").css("overflow", "hidden");
+             }
+             function CloseLogin() {
+                 $(".mask").hide();
+                 $("body").css("overflow", "auto");
+             }
+
+
+</script>    
+        <script>
+            $(".nav-list a").eq(0).addClass("checked");
+    </script>
+
+<div class="center_fk">
+        <div class="center_fh_l">
+            <p class="center_fk_p">当前页面:vip服务区</p>
+            <table class="vip_t">
+                <thead>
+                    <tr class="vip_tr">
+                        <td class="vip_tda">金卡号</td>
+                        <td class="vip_tdb">姓名</td>
+                        <td class="vip_tdc">地&nbsp;&nbsp;址</td>
+                    </tr>
+                </thead>
+                <tbody class="vip_tb">
+                    <tr class="vip_tb_r">
+                        <td>14645564545465</td>
+                        <td>火车不是推的</td>
+                        <td>四川省成都市高新区汇川街166号中海国际B幢709号</td>
+                    </tr>
+                    <tr class="vip_tb_r">
+                        <td>14645564545465</td>
+                        <td>火车不是推的</td>
+                        <td>四川省成都市高新区汇川街166号中海国际B幢709号</td>
+                    </tr>
+                    <tr class="vip_tb_r">
+                        <td colspan>14645564545465</td>
+                        <td>火车不是推的</td>
+                        <td>四川省成都市高新区汇川街166号中海国际B幢709号</td>
+                    </tr>
+                    <tr class="vip_tb_r">
+                        <td>14645564545465</td>
+                        <td>火车不是推的</td>
+                        <td>四川省成都市高新区汇川街166号中海国际B幢709号</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <div class="center_fh_r">
+            <div class="center_fh_r_t">
+                <div class="fh_t_d">
+                    <p><span class="color_f letter-s">会员姓名:</span><input type="text"></p>
+                    <p><span class="color_f letter-s">会员号码:</span><input type="text"></p>
+                </div>
+                <p class="fh_t_p">
+                    <img src="img/seach.png">
+                </p>
+            </div>
+            <div class="vip_ct_ft">
+               <div class="vip_new">
+                   <img src="img/new_user.png">
+               </div>
+                <ul class="vip_ul" style="height:50px;">
+                    <li>七格格</li>
+                    <li>七格格</li>
+                    <li>七格格</li>
+                </ul>
+                <div class="vip_jk" style="height:60px;">
+                    <img src="img/jiankang.png">
+                </div>
+                <ul class="vip_ft_ul">
+                    <li>
+                            <span class="vip_li_s">1</span>
+                            <span>红木笔架</span>
+                    </li>
+                    <li>
+                        <span class="vip_li_s">2</span>
+                        <span>红木笔架</span>
+                    </li>
+                    <li>
+                        <span class="vip_li_s">2</span>
+                        <span>红木笔架</span>
+                    </li>
+                    <li>
+                        <span class="vip_li_s">2</span>
+                        <span>红木笔架</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="footer">
+
+
+			<div class="public links">
+				<img src="/HtmlStlye/img/youqing.png" />
+				<a href="#" target="_Blank" >白虎</a>
+				<a href="http://www.sohu.com" target="target="_Blank"">搜狐</a>
+				<a href="http://www.renren.com" target="target="_Blank"">人人网</a>
+				<a href="http://www.sina.com.cn/" target="target="_Blank"">新浪</a>
+		
+
+
+			</div>
+			<div class="companycopyright">
+				<a class="ehecdcode" href="#"><img src="/attached/image/20151019/20151019144011_2567.jpg" ></a>
+				<div class="contactinfo">
+						Copyright &copy; 2009-2014 czvv.com  四川华美德贸易有限公司 版权所有<br />
+					蜀ICP备12005579号-6 All Rights Reserved<a href="http://www.ehecd.com" target="_blank">亿合科技技术支持</a><br />
+				 公司地址：四川省成都市高新区汇川街166号中海国际B幢709号</br>	
+                               联系电话：028-66036666     4000-1353-66    
+ 				邮箱：                             
+                               
+				</div>
+			</div>
+			
+		</div>
+</body>
+</html>

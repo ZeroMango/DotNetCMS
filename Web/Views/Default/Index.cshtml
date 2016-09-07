@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "网站后台-小型CMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Web.Server.Models.User
+<div class="easyui-layout" fit="true">
+    <script type="text/javascript">
+        $(function () {
+            $("#menu a").click(function () {
+                if ($('#main').tabs("getTab", $(this).text())) {
+                    $('#main').tabs("select", $(this).text());
+                }
+                else {
+                    $('#main').tabs('add', {
+                        fit: true,
+                        title: $(this).text(),
+                        closable: true,
+                        href: $(this).attr("url"),
+                        tools: [{
+                            iconCls: 'icon-mini-refresh',
+                            handler: function () {
+                                var tab = $('#main').tabs('getSelected');
+                                tab.panel('refresh', $(this).attr("url"));
+                            }
+                        }]
+                    });
+                }
+            });
+        });
+    </script>
+    <div id="personnelAction-buttons">
+        <a href="javascript:void(0)" id="btnPersonnelSave" class="easyui-linkbutton" iconcls="icon-ok" plain="true">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" plain="true" onclick="clearPersonnelForm()">清除</a>
+    </div>
+    <div id="personnelPanel" class="easyui-dialog" title="用户信息设置" style="width: 400px; padding: 10px;" closed="true"
+        buttons="#personnelAction-buttons" data-options="iconCls:'icon-save',resizable:false,modal:true">
+        <form id="addPersonnel" method="post">
+            <table>
+                <tr>
+                    <td>用户名:</td>
+                    <td>
+                        <input class="easyui-validatebox" readonly="true" type="text" name="s_UserName" data-options="required:true,validType:'length[3,20]'"
+                            missingmessage="请输入用户名" invalidmessage="用户名长度介于3-10之间" /></td>
+                </tr>
+                <tr>
+                    <td>密码:</td>
+                    <td>
+                        <input class="easyui-validatebox" type="password" name="s_Password" data-options="required:true,validType:'length[6,255]'"
+                            missingmessage="请输入密码" invalidmessage="密码长度应大于6位" /></td>
+                </tr>
+                <tr>
+                    <td>真实姓名:</td>
+                    <td>
+                        <input class="easyui-validatebox" type="text" name="s_RealName" data-options="required:true,validType:'length[2,10]'"
+                            missingmessage="请输入真实姓名" invalidmessage="真实姓名格式不正确" /></td>
+                </tr>
+                <tr>
+                    <td>联系电话:</td>
+                    <td>
+                        <input class="easyui-validatebox" maxlength="23" type="text" name="s_Phone" data-options="validType:'number'" invalidmessage="联系电话格式不正确" /></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>
+                        <input class="easyui-validatebox" type="text" name="s_Mail" data-options="validType:'email'" invalidmessage="Email格式不正确" /></td>
+                </tr>
+                <tr>
+                    <td>用户类型:</td>
+                    <td>
+                        <select disabled="disabled" class="easyui-combobox" name="i_UserType" data-options="required:true,editable:false" missingmessage="请选择用户类型">
+                            <option value="1">普通用户</option>
+                            <option value="2">管理员</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div data-options="region:'north',split:true" style="height: 60px;">
+        <a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-ok'">
+            <span id="aUserName">@Model.s_RealName</span>
+        </a>
+        <div id="mm1" style="width: 100px;">
+            <div onclick="editPersonnel()">个人信息修改</div>
+            <div onclick="logout()">退出</div>
+        </div>
+    </div>
+    <div data-options="region:'west',iconCls:'icon-reload',title:'操作菜单',split:true" style="width: 200px;">
+        <ul id="menu" class="easyui-tree">
+            <li>
+                <span>信息管理</span>
+                <ul>
+                    <li>
+                        <span><a href="#" url="@Url.Content("~/category/index")">栏目管理</a></span>
+                    </li>
+                    <li>
+                        <span><a href="#" url="@Url.Content("~/Article/index")">文章管理</a></span>
+                    </li>
+                    <li>
+                        <span><a href="#" url="@Url.Content("~/Model/index")">模型管理</a></span>
+                    </li>
+                    <li>
+                        <span><a href="#" url="@Url.Content("~/template/index")">模板管理</a></span>
+                    </li>               
+                    <li>
+                        <span><a href="#" url="@Url.Content("~/Velocity/index")">信息生成</a></span>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <span>系统设置</span>
+                <ul>
+                    <li>
+                        <span><a href="#" url="@Url.Content("~/user/list")">用户管理</a></span>
+                    </li>
+                    <li>
+                        <span><a href="#" url="@Url.Content("~/WebConfig/index")">站点设置</a></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div data-options="region:'center'" style="padding: 2px;" class="easyui-tabs" id="main">
+        <div title="主页" style="padding: 10px">
+            这将是一个很灵活的CMS平台。
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function logout() {
+        location.href = '@Url.Content("~/User/Logout")';
+    }
+
+    function clearPersonnelForm() {
+        $("#addPersonnel input").each(function () {
+            if ($(this).attr("name") != "i_UserType"
+                && $(this).attr("name") != undefined
+                && $(this).attr("name") != 's_UserName') {
+                $(this).val("");//清空之前填写的内容
+            }
+        });
+    }
+    function editPersonnel() {
+        $("#personnelPanel").dialog("open");
+        $('#addPersonnel').form('load', '@Url.Content("~/User/Edit/")@Model.ID');
+        $("#btnPersonnelSave").attr("href", "javascript:savePersonnel('@Url.Content("~/User/Edit?id=")@Model.ID&bAllowAccessAdmin=true')");
+    }
+    function savePersonnel(url) {
+        $('#addPersonnel').form('submit', {
+            url: url,
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                if (result == "yes") {
+                    $("#personnelPanel").dialog("close");
+                    $("#aUserName").html($("#addPersonnel input[name=s_RealName]").val());
+                    $.messager.alert('提醒', "编辑成功.");
+                }
+                else {
+                    $.messager.alert('提醒', result);
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,354 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="modelLayout" class="easyui-layout" fit="true">
+    <div data-options="region:'center',border:false" class="container">
+        <input class="easyui-searchbox" data-options="prompt:'请输入关键字...',menu:'#searchModel',searcher:doSearch" maxlength="20" style="width: 260px" />
+        <div id="searchModel" style="width: 100px">
+            <div data-options="name:'s_ModelName'">模型名称：</div>
+            <div data-options="name:'s_ModelIdentity'">模型标识：</div>
+        </div>
+        <div style="margin-top: 15px;">
+            <div id="modelToolbar">
+                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true" onclick="addModel()">新增</a>
+                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true" onclick="editModel()">编辑</a>
+                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" plain="true" onclick="deleteModel()">删除</a>
+                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" plain="true" onclick="showDetail()">查看模型内容</a>
+            </div>
+            <table id="modelList"></table>
+        </div>
+        <div id="actionModel-buttons">
+            <a href="javascript:void(0)" id="btnModelSave" class="easyui-linkbutton" iconcls="icon-ok" plain="true">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" plain="true" onclick="clearModel()">清除</a>
+        </div>
+        <div id="modelPanel" class="easyui-dialog" title="模型信息设置" style="width: 400px; height: 260px; padding: 10px;" closed="true"
+            buttons="#actionModel-buttons" data-options="iconCls:'icon-save',resizable:false,modal:true">
+            <form id="modelForm" method="post">
+                <table>
+                    <tr>
+                        <td>模型名称:</td>
+                        <td>
+                            <input class="easyui-validatebox" type="text" name="s_ModelName" data-options="required:true,validType:'length[1,20]'"
+                                missingmessage="请输入模型名称." style="width: 200px;" invalidmessage="模型名称长度应小于20." /></td>
+                    </tr>
+                    <tr>
+                        <td>模型标识:</td>
+                        <td>
+                            <input class="easyui-validatebox" type="text" name="s_ModelIdentity" data-options="required:true,validType:'length[1,20]'"
+                                missingmessage="请输入模型标识." style="width: 200px;" invalidmessage="模型标识长度应小于20." /></td>
+                    </tr>
+                    <tr>
+                        <td>模型描述:</td>
+                        <td>
+                            <textarea class="easyui-validatebox" name="s_ModelMemo" style="width: 200px; height: 50px;"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div data-options="region:'south',split:true,title:'字段信息',collapsed:true,border:false" style="height: 260px;" class="container">
+        <div id="itemToolbar">
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true" onclick="addItem()">新增</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true" onclick="editItem()">编辑</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" plain="true" onclick="deleteItem()">删除</a>
+        </div>
+        <table id="modelItemList"></table>
+        <div id="actionItem-buttons">
+            <a href="javascript:void(0)" id="btnItemSave" class="easyui-linkbutton" iconcls="icon-ok" plain="true">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" plain="true" onclick="clearItem()">清除</a>
+        </div>
+        <div id="itemPanel" class="easyui-dialog" title="字段信息设置" style="width: 400px; height: 280px; padding: 10px;" closed="true"
+            buttons="#actionItem-buttons" data-options="iconCls:'icon-save',resizable:false,modal:true">
+            <form id="itemForm" method="post">
+                <table>
+                    <tr>
+                        <td>字段标题:</td>
+                        <td>
+                            <input class="easyui-validatebox" type="text" name="s_ItemTitle" data-options="required:true,validType:'length[1,20]'"
+                                missingmessage="请输入字段标题." style="width: 200px;" invalidmessage="字段标题长度应小于20." /></td>
+                    </tr>
+                    <tr>
+                        <td>字段英文名称:</td>
+                        <td>
+                            <input class="easyui-validatebox" type="text" name="s_ItemName" data-options="required:true,validType:'length[1,20]'"
+                                missingmessage="请输入字段英文名称." style="width: 200px;" invalidmessage="字段英文名称长度应小于20." /></td>
+                    </tr>
+                    <tr>
+                        <td>字段类型:</td>
+                        <td>
+                            <select class="easyui-combobox" name="s_Itemtype" data-options="required:true,editable:false" missingmessage="请字段类型.">
+                                <option value="单行文本框">单行文本框</option>
+                                <option value="多行文本框">多行文本框</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>字段是否必填:</td>
+                        <td>
+                            <input type="checkbox" id="b_IsRequired" name="" /><label for="b_IsRequired">是</label>
+                            <input type="hidden" name="b_IsRequired" value="false" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>字段最小长度:</td>
+                        <td>
+                            <input class="easyui-numberbox" type="text" name="i_MinCount" maxlength="6" style="width: 200px;" /></td>
+                    </tr>
+                    <tr>
+                        <td>字段最大长度:</td>
+                        <td>
+                            <input class="easyui-numberbox" type="text" name="i_MaxCount" maxlength="6" style="width: 200px;" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var modelListRowIndex = 0;
+    function doSearch(value, name) {
+        $('#modelList').datagrid('load', {
+            sField: name,
+            sKeyValue: value
+        });
+    }
+    function addModel() {
+        $("#modelPanel").dialog("open");
+        clearModel();
+        $("#btnModelSave").attr("href", "javascript:saveModel('@Url.Content("~/Model/Add")')");
+    }
+    //清空表单
+    function clearModel() {
+        $("#modelForm input,textarea").each(function () {
+            $(this).val("");//清空之前填写的内容
+        });
+    }
+
+    function editModel() {
+        var row = $('#modelList').datagrid('getSelected');
+        if (row) {
+            $("#modelPanel").dialog("open");
+            $('#modelForm').form('load', '@Url.Content("~/Model/Edit/")' + row.ID+"?"+new Date().getTime());
+            $("#btnModelSave").attr("href", "javascript:saveModel('@Url.Content("~/Model/Edit/")" + row.ID + "')");
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要编辑的模型.");
+        }
+    }
+
+    function deleteModel() {
+        var row = $('#modelList').datagrid('getSelected');
+        if (row) {
+            $.messager.confirm('提示', '确定删除该模型吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "@Url.Content("~/Model/Delete/")" + row.ID,
+                        success: function (result) {
+                            if (result == "yes") {
+                                $('#modelList').datagrid('reload');
+                            }
+                            else {
+                                $.messager.alert('提醒', result);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要删除的模型.");
+        }
+    }
+    $(function () {
+        $("#itemForm input[type=checkbox]").each(function () {
+            $(this).click(function () {//让复选框选择与否状态值 赋给隐藏变量
+                if ($(this).attr("checked")) {
+                    $("input[name=" + $(this).attr("id") + "]").val("true");
+                }
+                else {
+                    $("input[name=" + $(this).attr("id") + "]").val("false");
+                }
+            });
+        });
+        $('#itemForm').form({
+            onLoadSuccess: function (data) {//表单数据加载完后
+                if ($("input[name=b_IsRequired]").val() == "true") {
+                    $("#b_IsRequired").attr("checked", true);
+                }
+                else {
+                    $("#b_IsRequired").attr("checked", false);
+                }
+            }
+        });
+        $('#modelList').datagrid({
+            url: '@Url.Content("~/Model/List")',
+            border: false,
+            pagination: true,
+            pageSize: 6,
+            pageList: [6, 10, 20, 30, 40, 50],
+            toolbar: "#modelToolbar",
+            singleSelect: true,
+            loadMsg: "正在加载...",
+            columns: [[
+                { field: 's_ModelName', title: '模型名称', width: 150, sortable: true },
+                { field: 's_ModelIdentity', title: '模型标识', width: 150, sortable: true },
+                { field: 's_ModelMemo', title: '模型描述', width: 300 }
+            ]],
+            onClickRow: function (rowIndex, rowData) {
+                modelListRowIndex = rowIndex;
+                $('#modelLayout').layout('expand', 'south');
+                $('#modelItemList').datagrid({
+                    url: '@Url.Content("~/Model/ItemList")?iTableID=' + rowData.ID,
+                    border: false,
+                    pagination: true,
+                    toolbar: "itemToolbar",
+                    singleSelect: true,
+                    loadMsg: "正在加载...",
+                    columns: [[
+                        { field: 's_ItemTitle', title: '字段标题', width: 120, sortable: true },
+                        { field: 's_ItemName', title: '字段名称', width: 100, sortable: true },
+                        { field: 's_Itemtype', title: '字段类型', width: 100, sortable: true },
+                        { field: 'b_IsRequired', title: '是否必填', width: 100 },
+                        { field: 'i_MinCount', title: '最小长度', width: 100 },
+                        { field: 'i_MaxCount', title: '最大长度', width: 100 }
+                    ]]
+                });
+
+            }
+        });
+    });
+
+    //添加字段
+    function addItem() {
+        var row = $('#modelList').datagrid('getSelected');
+        if (row) {
+            $("#itemPanel").dialog("open");
+            clearItem();
+            $("#btnItemSave").attr("href", "javascript:saveItem('@Url.Content("~/Model/AddItem")?iTableID=" + row.ID + "')");
+        }
+    }
+
+    //清除字段表单信息
+    function clearItem() {
+        $("#itemPanel input,textarea").each(function () {
+            if ($(this).attr("name") != "s_Itemtype" && $(this).attr("name") != undefined) {
+                $(this).val("");//清空之前填写的内容
+            }
+        });
+    }
+
+    //编辑字段
+    function editItem() {
+        var row = $('#modelItemList').datagrid('getSelected');
+        var selectedModelRow = $('#modelList').datagrid('getSelected');
+        if (row) {
+            $("#itemPanel").dialog("open");
+            $('#itemForm').form('load', '@Url.Content("~/Model/EditItem/")' + row.ID + "?" + new Date().getTime());
+            $("#btnItemSave").attr("href", "javascript:saveItem('@Url.Content("~/Model/EditItem")?iTableID=" + selectedModelRow.ID + "&id=" + row.ID + "')");
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要编辑的字段.");
+        }
+    }
+
+    //删除字段
+    function deleteItem() {
+        var row = $('#modelItemList').datagrid('getSelected');
+        if (row) {
+            $.messager.confirm('提示', '确定删除该字段吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "@Url.Content("~/Model/DeleteItem/")" + row.ID,
+                        success: function (result) {
+                            if (result == "yes") {
+                                $('#modelItemList').datagrid('reload');
+                            }
+                            else {
+                                $.messager.alert('提醒', result);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要删除的字段.");
+        }
+    }
+
+    /*
+    提交表单
+    */
+    function saveModel(url) {
+        $('#btnModelSave').linkbutton('disable');
+        $('#modelForm').form('submit', {
+            url: url,
+            onSubmit: function () {
+                $('#btnModelSave').linkbutton('enable');
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                if (result == "yes") {
+                    $("#modelPanel").dialog("close");
+                    $("#modelList").datagrid("reload");
+                }
+                else {
+                    $.messager.alert('提醒', result);
+                }
+                $('#btnModelSave').linkbutton('enable');
+            }
+        });
+    }
+
+    //保存
+    function saveItem(url) {
+        $('#btnItemSave').linkbutton('disable');
+        $('#itemForm').form('submit', {
+            url: url,
+            onSubmit: function () {
+                $('#btnItemSave').linkbutton('enable');
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                if (result == "yes") {
+                    $("#itemPanel").dialog("close");
+                    $("#modelItemList").datagrid("reload");
+                }
+                else {
+                    $.messager.alert('提醒', result);
+                }
+                $('#btnItemSave').linkbutton('enable');
+            }
+        });
+    }
+    //添加选项卡显示模型内容
+    function showDetail() {
+        var row = $('#modelList').datagrid('getSelected');
+        if (row) {
+            if ($('#main').tabs("getTab", row.s_ModelName)) {
+                $('#main').tabs("select", row.s_ModelName)
+            }
+            else {
+                $('#main').tabs('add', {
+                    fit: true,
+                    title: row.s_ModelName,
+                    closable: true,
+                    href: '@Url.Content("~/ModelValue/Index?iTableID=")' + row.ID,
+                    tools: [{
+                        iconCls: 'icon-mini-refresh',
+                        handler: function () {
+                            var tab = $('#main').tabs('getSelected');
+                            tab.panel('refresh', '@Url.Content("~/ModelValue/Index?iTableID=")' + row.ID);
+                        }
+                    }]
+                });
+            }
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要查看的模型内容.");
+        }
+        return false;
+    }
+</script>

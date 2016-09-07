@@ -1,0 +1,185 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div id="velocityGenerate" class="easyui-layout" style="width: 99%; height: 500px;" fit="true">
+        <div data-options="region:'west',title:'栏目列表',split:true" title="West" style="width: 240px;">
+            <ul id="categoryArticleTreeList"></ul>
+        </div>
+        <div data-options="region:'center',title:'操作区'">
+            <input class="easyui-searchbox" data-options="prompt:'请输入关键字...',menu:'#searchMenu',searcher:doSearch" maxlength="20" style="width: 260px" />
+            <div id="searchMenu" style="width: 100px">
+                <div data-options="name:'s_Title'">文章标题：</div>
+                <div data-options="name:'s_Content'">文章内容：</div>
+            </div>
+            <div style="margin-top: 15px;">
+                <div id="articleToolbar">
+                    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true" onclick="addArticle()">新增</a>
+                    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true" onclick="editArticle()">编辑</a>
+                    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" plain="true" onclick="deleteArticle()">删除</a>
+                </div>
+                <table id="articleList" style="width:860px;height:400px"></table>
+            </div>
+
+            <div id="action-buttons">
+                <a href="javascript:void(0)" id="btnArticleSave" class="easyui-linkbutton" iconcls="icon-ok" plain="true">保存</a>
+            </div>
+            <div id="articlePanel" class="easyui-dialog" title="文章信息设置" style="width: 850px; height: 600px; padding: 1px;" closed="true"
+                buttons="#action-buttons" data-options="iconCls:'icon-save',resizable:false,modal:true">
+                <iframe id="formArticleFrame" name="formArticleFrame" src="@Url.Content("~/Article/Access")" width="100%" frameborder="0" height="99%"></iframe>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var iCategoryID=0;//处于选中的栏目
+        function doSearch(value, name) {
+            $('#articleList').datagrid('load', {
+                sField: name,
+                sKeyValue: value,
+                iCategoryID: iCategoryID
+            });
+        }
+        function addArticle() {
+            $("#formArticleFrame").attr("src", "@Url.Content("~/Article/Access?iCategoryID=")" + iCategoryID);//重新刷新弹出页面
+            $("#articlePanel").dialog("open");
+            $("#btnArticleSave").attr("href", "javascript:saveArticle('@Url.Content("~/article/Add")')");
+        }
+
+        function editArticle() {
+            var row = $('#articleList').datagrid('getSelected');
+            if (row) {
+                $("#articlePanel").dialog("open");
+                $("#formArticleFrame").attr("src", "@Url.Content("~/article/Access")?id=" + row.ID + "&" + new Date().getTime());
+                var acceessUrl = '@Url.Content("~/article/Edit/")' + row.ID;
+                $("#btnArticleSave").attr("href", "javascript:saveArticle('" + acceessUrl + "')");
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要编辑的文章.");
+        }
+    }
+
+    function deleteArticle() {
+        var row = $('#articleList').datagrid('getSelected');
+        if (row) {
+            $.messager.confirm('提示', '确定删除该文章吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "@Url.Content("~/article/Delete/")" + row.ID,
+                        success: function (result) {
+                            if (result == "yes") {
+                                $('#articleList').datagrid('reload');
+                            }
+                            else {
+                                $.messager.alert('提醒', result);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        else {
+            $.messager.alert('提醒', "请选择所要删除的文章.");
+        }
+    }
+    $(function () {
+        $('#categoryArticleTreeList').tree({
+            url: '@Url.Content("/Category/TreeJsonList")',
+            lines: true,
+            cascadeCheck: false,
+            onSelect: function (node) {
+                iCategoryID= node.id;
+                $('#articleList').datagrid('load', {
+                    iCategoryID: node.id
+                });
+            }
+        });
+        setTimeout(function () {
+            $("#categoryArticleTreeList .tree-title").click(function () {
+                var thisTxt = $(this).text();
+                if (thisTxt == "保健品" || thisTxt == "保健器材" || thisTxt == "皮肤护理") {
+                    $(".datagrid-cell").eq(2).find("span:first").text("市场价格");
+                } else {
+                    $(".datagrid-cell").eq(2).find("span:first").text("作者");
+                }
+            });
+        },1500);
+        
+            $('#articleList').datagrid({
+                url: '@Url.Content("~/article/list")',
+                border: false,
+                pagination: true,
+                toolbar: "#articleToolbar",
+                singleSelect: true,
+                loadMsg: "正在加载...",
+                columns: [[
+                    { field: 's_Title', title: '标题', width: 200, sortable: true, rowspan: 2 },
+                    { field: 's_CategoryName', title: '所属栏目', width: 120, sortable: true, rowspan: 2 },
+                    {
+                        field: 's_Author', title:"作者", width: 80, rowspan: 2
+                    },
+                    { field: 's_UpdateTime', title: '更新时间', width: 120, sortable: true, rowspan: 2 },
+                    { field: 's_RealName', title: '所属用户', width: 100, sortable: true, rowspan: 2 },
+                    {
+                        field: 'i_Status', title: '是否发布', width: 60, rowspan: 2, formatter: function (value, row, index) {
+                            if (value == 0) {
+                                return "是";
+                            } else {
+                                return "否";
+                            }
+                        }
+                    },
+                    { title: '文章属性', width: 150, colspan: 3 }],
+                    [
+                        {
+                            field: 'b_IsTop', title: '置顶', align: 'center', width: 50, sortable: true, formatter: function (value, row, index) {
+                                if (value) {
+                                    return "是";
+                                } else {
+                                    return "否";
+                                }
+                            }
+                        },
+                        {
+                            field: 'b_IsSlide', title: '幻灯片', align: 'center', width: 50, sortable: true, formatter: function (value, row, index) {
+                                if (value) {
+                                    return "是";
+                                } else {
+                                    return "否";
+                                }
+                            }
+                        },
+                        {
+                            field: 'b_IsHot', title: '热点', align: 'center', width: 50, sortable: true, formatter: function (value, row, index) {
+                                if (value) {
+                                    return "是";
+                                } else {
+                                    return "否";
+                                }
+                            }
+                        }
+                    ]
+                ]
+            });
+        });
+
+        /*
+        提交表单
+        */
+        function saveArticle(url) {
+            window.frames["formArticleFrame"].saveArticle(url);
+        }
+
+        //刷新列表数据
+        function refreshArticleList() {
+            $('#articleList').datagrid('reload');//刷新列表数据
+            $("#articlePanel").dialog("close");//关闭弹出框
+            //$("#formArticleFrame").attr("src", "@Url.Content("~/Article/Access")");//重新刷新弹出页面
+    }
+
+        //提示框
+        function messageAlert(msg) {
+            $.messager.alert('提醒', msg);
+        }
+    </script>
+    <input type="hidden" class="titleName" value="作者" />

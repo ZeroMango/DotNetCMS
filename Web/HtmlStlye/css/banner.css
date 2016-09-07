@@ -1,0 +1,16 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*幻灯片动画*/
+.swipe{width:100%;overflow:hidden;position:relative;  border-bottom: 3px solid #eff1f0;}
+.swipe ul{
+	-webkit-transition:left 800ms ease-in 0;
+	-moz-transition:left 800ms ease-in 0;
+	-o-transition:left 800ms ease-in 0;
+	-ms-transition:left 800ms ease-in 0;
+	transition:left 800ms ease-in 0;
+}
+#pagenavi{position:absolute;left:0;bottom:0px;text-align:right;width:100%; padding:7px 0px; z-index:5;background:rgba(0,0,0,.6); }
+#pagenavi a{width:16px; height:16px;line-height:99em; background:url(../img/bannerfocus.png) no-repeat; border-radius:50%; margin:0 4px; overflow:hidden; cursor:pointer; display:inline-block; *display:inline; *zoom:1; position:relative;}
+#pagenavi a.active{position:relative; background-color:#a2080e;}
+#slider li img {width: 100%;display:block; overflow:hidden;}
+#slider li a{display:block; margin:0; padding:0; border:0; overflow:hidden;}

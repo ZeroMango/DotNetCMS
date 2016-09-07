@@ -1,0 +1,117 @@
+/*主体部分*/
+/*动态部分*/
+.eus-box {
+width: 100%;
+height: auto;
+margin: 15px 0px 20px 0px;
+}
+.eus-main {
+	width:1000px;
+	height:auto;
+	margin:0 auto;
+}
+
+
+
+
+/*活动部分*/
+
+.now_position {
+width: 954px;
+height: 35px;
+line-height: 22px;
+font-size: 14px;
+overflow: hidden;
+text-indent: 30px;
+color: #333;
+border-bottom: 1px solid #c3c3c3;
+/* padding-left: 30px; */
+margin-left: 15px;
+}
+.now_position{
+	background:url(../images/com_03.png) no-repeat;
+}
+.now_link {
+margin-right: 10px;
+color: #333;
+}
+
+.eus-activity {
+	width: auto;
+	height: auto;
+}
+.eus-activity h3 {
+	border-top-right-radius: 5px;
+	-moz-border-top-right-radius:5px;
+	-webkit-border-top-right-radius: 10px;
+	border-top-left-radius: 5px;
+	-moz-border-top-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	height: 30px;
+	border-bottom: solid 1px #c3c3c3;
+	font-size: 14px;
+	text-indent: 30px;
+	color:#3564b6;
+	font-weight: bold;
+	line-height: 30px;
+	background: linear-gradient(top#ffffff, #ececec);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#ececec));
+	background: -moz-linear-gradient(top, #ececec, #ffffff);
+	background: -o-linear-gradient(top, #ececec, #ffffff);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ececec');
+}
+.eus-activity h3 .more {
+	position: relative;
+	float: right;
+	color:#3564b6;
+	font-size: 14px;
+	font-weight: bold;
+	padding-right:30px;
+}
+.activity-detail {
+padding: 0px 14px 0px 5px;
+/* width: 1000px; */
+}
+.activity-detail li {
+width: 225px;
+margin-left: 17px;
+margin-top: 20px;
+float: left;
+}
+.detail-text {
+	width: 225px;
+}
+.detail-text {
+	margin-top:6px;
+}
+.detail-text p {
+color: #333333;
+width: 225px;
+height: 26px;
+line-height: 25px;
+overflow: hidden;
+font-size: 14px;
+font-weight: bold;
+text-align: center;
+cursor: pointer;
+}
+/*活动部分*/
+
+/*企业介绍*/
+.details-text {
+width: 954px;
+margin-top: 20px;
+margin-left: 20px; min-height:300px; overflow:hidden;
+
+}
+.activity-detail .details-text p{
+	text-indent: 25px;
+	font-size:14px;
+	color:#333;
+	line-height:25px;
+}
+/*企业介绍*/
+
+
+
+/*主体部分*/
